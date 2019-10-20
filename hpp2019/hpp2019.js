@@ -23,6 +23,7 @@ const ROVPORT = 8888;
 
 //latest top and bottom side packet
 var bearMessage = "";
+var toPageMessage
 
 
 //express additions
@@ -48,11 +49,12 @@ parser.on('data', dat)
 
 
 function Open() {
-    console.log("TCU Board Port Open")
+    console.log("Bear Connected!")
 }
 
 function dat(data) {
-    console.log(data.toString());
+    bearMessage = data.toString()
+    console.log(bearMessage);
 
 }
 

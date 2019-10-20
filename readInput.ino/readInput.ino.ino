@@ -33,14 +33,14 @@ void loop() {
 
   delay(500);
 
-  print();
+  buffprint();
 }
 
-void print() {
+void buffprint() {
   for (int i = 0; i < SIZE; i++) {
     Serial.print(buffer[i]); 
   }
-  Serial.print('\n');
+  Serial.println("");
 }
 
 bool pressed() {
