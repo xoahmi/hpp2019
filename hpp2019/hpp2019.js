@@ -291,13 +291,18 @@ hpp2019.io.on("connection", function(socket){
 
 //broadcast bearMessage to all webpages.
 //timer to send data every pagePing milliseconds
-    setInterval(sendPageData,pagePing);
+//    setInterval(sendPageData,pagePing);
 
 //adds a variable called bearMessage to the JSON object that is transmitted to webpages.
     function sendPageData(){
         var d = new Date();
-        hpp2019.io.emit('SocketStream', { bearMessage: bearMessage + " " +  clientConnected + "" + d.getTime() });
-        hpp2019.io.emit('bearMessage', bearMessage);
+        hpp2019.io.emit('SocketStream', { pageMsg: pageState + " " +  clientConnected + "" + d.getTime() });
+        hpp2019.io.emit('pageState', pageState);
+    }
+    function sendPriority(){
+        var d = new Date();
+        hpp2019.io.emit('SocketStream', { sendPriority: priority + " " +  clientConnected + "" + d.getTime() });
+        hpp2019.io.emit('priority', priority);
     }
 
 //receive safety message from webpage
@@ -345,8 +350,16 @@ hpp2019.io.on("connection", function(socket){
                 if (pageState.length == 22) {
                     pageState + currInty + ",";
                     // exit prog, or enter locked state
+
                 } else {
                     pageState += "" + currInty + ",";
+
+
+                    var tempData = pageState;
+                    cleanData()
+                    sendPageData();
+
+                    pageState = tempData;
                     // go back to webpage for type
                 }
             } else {
@@ -357,16 +370,24 @@ hpp2019.io.on("connection", function(socket){
 
     });
 
+    function cleanData(){
+        if(!(pageState.length == 24)){
+            pageState = pageState.substring(0,pageState.length - (pageState.length%4));
+            console.log(pageState);
+            pageState = pageState + "0a0,0a0,0a0,0a0,0a0,0a0".substring(pageState.length ,23)
+        }
+    }
+
     socket.on("conf", function(msg){
         if (msg == 1){
 
-            if(!(pageState.length == 24)){
-                pageState = pageState.substring(0,pageState.length - (pageState.length%4));
-                console.log(pageState);
-                pageState = pageState + "0a0,0a0,0a0,0a0,0a0,0a0".substring(pageState.length ,23)
-            }
+            cleanData();
+
+            sendPageData()
 
             // PRIORITIZE TIME
+
+            sendPriority();
 
             bearMessage = "00000000000000";
             pageState = "";

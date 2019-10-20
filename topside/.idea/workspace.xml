@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7203e4bc-6ef7-49d2-b5a6-77c65449e4a6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../check.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../hpp2019/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../hpp2019/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../hpp2019/hpp2019.js" beforeDir="false" afterPath="$PROJECT_DIR$/../hpp2019/hpp2019.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mediteddyUI.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mediteddyUI_a.html" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
