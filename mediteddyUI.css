@@ -1,0 +1,151 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: rgb(2,0,36);
+    background: linear-gradient(330deg, rgba(2,0,36,1) 0%, rgba(0,73,166,1) 0%, rgba(0,212,255,1) 100%)
+}
+
+.jumbotron {
+    outline-width:"30px";
+    outline-color:"#ffffff";
+    background-color: #ffffff !important;
+    padding: 20px;
+    margin-bottom: 0px;
+}
+
+.well.outer{
+    background-color: #ffffff !important;
+    padding: 10px;
+    height: 125px;
+}
+
+.well {
+    background-color: #7d8594 !important;
+    padding: 10px;
+}
+
+.well.outer.large{
+    background-color: #ffffff !important;
+    padding: 10px;
+    height: 495px;
+}
+
+.well.large {
+    background-color: #737373 !important;
+    height: 475px;
+    padding: 10px;
+}
+
+.btn-lg {
+    background-color: #7d8594;
+    margin: none;
+    padding: none;
+}
+
+.well.outer.small{
+    background-color: #ffffff !important;
+    padding: 10px;
+    height: 87px;
+}
+
+.well.inner.small {
+    background-color: #737373 !important;
+    height: 65px;
+    padding: 10px;
+    margin: 0px;
+}
+
+.btn-success {
+    padding: none;
+}
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 10px; /* Specified height */
+    background: #d3d3d3; /* Grey background */
+    outline: none; /* Remove outline */
+    border-radius: 5px;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 30px; /* Set a specific slider handle width */
+    height: 30px; /* Slider handle height */
+    border-radius: 50%;
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 25px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.jumbotron{
+    height: 537px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 40;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #737373;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.closebtn {
+    margin-top: 250px;
+    margin-right: none;
+    background: #ffffff;
+}
+
+.btn-tall {
+    width: 1px;
+    height: 200;
+    padding: none;
+    margin: none;
+    background-color: white;
+}
