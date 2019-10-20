@@ -246,7 +246,7 @@ var classifier =
 
 
 
-//------------Arduino Due (TCU Board) [serial/USB]----------------//
+//------------Arduino Mega[serial/USB]----------------//
 //replace with appropriate port #
 const bearPort = new serial("/dev/cu.usbmodem14101");
 var SerialPort = serial.SerialPort;
@@ -264,16 +264,24 @@ function Open() {
 }
 
 function dat(data) {
-    bearMessage = data.toString()
-    console.log(bearMessage);
-
+    if(pageState.length % 4 == 1) {
+        bearMessage = data.toString()
+        console.log(bearMessage);
+    }
 }
 
 
 
 //-------upstream--------------------------------------------------//
 //socket.io connection callback
-var pageMessage = "0a0,0a0,0a0,0a0,0a0,0a0";
+var pageState = "";
+
+var currType = 0;
+var currLoc = 0;
+var currInty = 0;
+
+
+
 var points = 0;
 var priority = 0;
 hpp2019.io.on("connection", function(socket){
@@ -294,9 +302,9 @@ hpp2019.io.on("connection", function(socket){
 
 //receive safety message from webpage
     socket.on("Pagemsg", function(msg){
-        pageMessage = msg;
-        console.log("message is:" + pageMessage);
-        points = pageMessage.split(',');
+        pageState = msg;
+        console.log("message is:" + pageState);
+        points = pageState.split(',');
         // var pointPri = [0,0,0,0,0,0];
         // for(i = 0; i < points.length; i++) {
         //     a = points[i][0];
@@ -313,12 +321,64 @@ hpp2019.io.on("connection", function(socket){
 
     });
 
+
+
+    socket.on("type", function(msg){
+
+        if (pageState.length %4 ==0) {
+            if (msg >= 0 && msg < 14) {
+                currType = msg;
+                pageState += "" + currType;
+            } else {
+                console.log("Type out of range")
+            }
+        }
+
+    });
+
+    socket.on("inty", function(msg){
+
+        if( pageState.length % 4 == 2) {
+            if (msg >= 0 && msg < 6) {
+                currInty = msg;
+
+                if (pageState.length == 22) {
+                    pageState + currInty + ",";
+                    // exit prog, or enter locked state
+                } else {
+                    pageState += "" + currInty + ",";
+                    // go back to webpage for type
+                }
+            } else {
+                console.log("Type out of range")
+            }
+        }
+
+
+    });
+
     socket.on("conf", function(msg){
+        if (msg == 1){
 
-        
+            if(!(pageState.length == 24)){
+                pageState = pageState.substring(0,pageState.length - (pageState.length%4));
+                console.log(pageState);
+                pageState = pageState + "0a0,0a0,0a0,0a0,0a0,0a0".substring(pageState.length ,23)
+            }
+
+            // PRIORITIZE TIME
+
+            bearMessage = "00000000000000";
+            pageState = "";
+            setTimeout(function(){
+                console.log('next patient');  //call notification about prioritization
+            },1000);
 
 
-        // PRIORITIZE TIME
+
+        }
+
+
     });
 });
 
