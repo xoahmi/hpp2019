@@ -1,0 +1,98 @@
+ <!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    div.scroll {
+      width: 200px;
+      height: 200px;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+    div.notscroll {
+      width: 200px;
+      height: 200px;
+      overflow-x: hidden;
+      overflow-y: visible;
+    }
+  </style>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<div class="menu">
+  <h1>
+      <ul >
+        <li> <a href="index.ejs" style="color:red; padding-left:50px" > Pilot</a></li>
+        <li> <a href="cop.ejs" style="color:red; padding-left:50px"> Co-Pilot</a></li>
+        <li> <a href="ops.ejs" style="color:red;padding-left:50px"> Operations</a></li>
+      </ul>
+    </h1>
+</div>
+
+<body>
+
+<h1>OPERATIONS PAGE</h1>
+
+  <div id ="foo" class = "scroll">
+  </div>
+<hr></hr>
+  <div id ="bar" class = "notscroll">
+  </div>
+<hr></hr>
+
+<div id ="bottomList" class = "scroll">
+  </div>
+
+
+  <div>
+    <iframe src="./tm" top="100" frameborder="0" scrolling="auto" height="480" align="right"> </iframe>
+  </div>
+
+  <script src ="/javascripts/socket.io/socket.io.js"></script>
+  <script>
+
+var crateID;
+var socket = io();
+var intervalUpdate = setInterval(updateList, 1000);
+
+
+function updateList(){
+
+socket.on("crateIDMessage", function(msg){
+    crateID = msg;
+//console.log(crateID);
+
+document.getElementById('foo').appendChild(updateRFIDList(crateID));
+document.getElementById('bar').appendChild(updateRFIDList(crateID));
+var textarea = document.getElementById('foo');
+textarea.scrollTop = textarea.scrollHeight;
+
+});
+}
+
+
+
+function updateRFIDList(crateID) {
+    // Create the list element:
+    var list = document.createElement('ul');
+        // Create the list item:
+        var item = document.createElement('li');
+
+        // Set its contents:
+        item.appendChild(document.createTextNode(crateID));
+
+        // Add it to the list:
+        list.appendChild(item);
+
+    // Finally, return the constructed list:
+    return list;
+}
+
+
+
+// Add the contents of crateID to #foo:
+//document.getElementById('foo').appendChild(updateRFIDList(crateID));
+  </script>
+
+</body>
+
+</html>

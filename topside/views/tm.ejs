@@ -1,0 +1,68 @@
+<html>
+<body>
+<script type = "text/javascript">
+function parseMessage() {
+ 
+var oldMessage = "T1=1300;T2=1500;IMU1=Temp:100-Pressure:200";
+var message = "D1=14;D2=-36;D3=1000;D4=153;D5=-248;D6=-248;D7=0;D8=-1;D9=1;D10=5760;D11=12;D12=34;D13=16381;D14=-309;D15=-109;D16=0;D17=0;D18=-1;D19=16;D20=12;D21=-36;D22=979;Temp=25";
+ 
+ 
+var dataDelimiter = ';';
+var elementDelimiter = '=';
+var subElementDelimiter = '-';
+var paramDelimiter = ':';
+ 
+ 
+var dataArray = message.split(dataDelimiter);
+for (i=0; i < dataArray.length; i++) {
+var elementArray = dataArray[i].split(elementDelimiter);
+ 
+switch (elementArray[0]) {
+ 
+case "D1":
+case "D2":
+case "D3":
+case "D4":
+case "D5":
+case "D6":
+case "D7":
+case "D8":
+case "D9":
+case "D10":
+case "D11":
+case "D12":
+case "D13":
+case "D14":
+case "D15":
+case "D16":
+case "D17":
+case "D18":
+case "D19":
+case "D20":
+case "D21":
+case "D22":
+case "Temp":
+case "IMU1":
+document.write("Captured: " + elementArray[0] + " as ");
+subElementData = elementArray[1].split(subElementDelimiter);
+for (j=0; j < subElementData.length; j++) {
+document.write(' ' + subElementData[j]);
+}
+document.write('<br>');
+break;
+ 
+default :
+document.write("Not captured: " + dataArray[i] + '<br>');
+}
+ 
+}
+ 
+ 
+}
+parseMessage();
+ 
+</script>
+<meta http-equiv="refresh" content="10" >
+</body>
+ 
+</html>

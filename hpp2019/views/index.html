@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script        src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -111,6 +111,7 @@
                     <div class="well inner small" background-color="#737373">
                         <div class="col-sm-10" align="left">
                             <br>
+                            <script src ="/javascripts/socket.io/socket.io.js"></script>
                             <script type="text/javascript">
                                 var slider = document.getElementById("degree");
                                 var output = document.getElementById("intensity");
@@ -118,6 +119,36 @@
                                 slider.oninput = function() {
                                     output.innerHTML = this.value;
                                 }
+
+                                //socket io client connection. Note, there is not need to supply server URL/Port when node is source.
+                                var socket = io();
+
+                                var bearData;
+
+                                //receive data template
+
+                                function splitMessage(message) {
+                                    var dataArray = message.split(' ');
+                                    var tempText = "";
+                                    for (i = 0; i < dataArray.length; i++) {
+                                        bearData = dataArray.toString();
+
+                                    }
+
+                                    // String of 13 0s (ei. 0101010101010 )
+                                }
+                                    //send data template
+                                    var safetyButton = document.getElementById("butSafe");
+                                    safetyButton.addEventListener("click", sendSafetyMessage);
+
+                                    function sendSafetyMessage() {
+                                        socket.emit('SafetyMessage', "StringOfMedVals");
+                                    }
+                                    // location [0,12] + type [0,8] + intensity [0,5] ,  x 6
+
+
+
+
                             </script>
                             <div class="slidecontainer">
                                 <input type="range" min="1" max="100" value="0" class="slider" id="myRange">

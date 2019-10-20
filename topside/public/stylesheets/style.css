@@ -1,0 +1,35 @@
+body {
+  color: red;
+  margin: auto;
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.box{
+  float:left;
+  margin-right:20px;
+  display:inline-block;
+}
+
+.menu li {
+  display: inline;
+ }
+
+video {
+  position:fixed;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+  transform: translateX(-50%) translateY(-50%);
+  background: 0 no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
+}
+
+a {
+  color: #00B7FF;
+}

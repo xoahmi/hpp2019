@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body style="background: url('//192.168.1.121/img/video.mjpeg') no-repeat center center fixed; background-size: cover;">
+
+  <style type="text/css">
+      .roll {
+        width: 50%;
+        position: absolute;
+        display: block;
+        margin-left: 25%;
+      }
+      .yaw {
+        width: 50%;
+        position: absolute;
+        display: block;
+        margin-left: 25%;
+      }
+      .pitch {
+        width: 50%;
+        position: absolute;
+        display: block;
+        margin-left: 25%;
+      }
+    .heading {
+      width: 20%;
+      height: 100%;
+      position: absolute;
+      display: block;
+      margin-left: 49.3%;
+      margin-top: 37.5%;
+      z-index: -100%;
+      font-size: 150%;
+    }
+.com{
+  width: 55%;
+  margin-top: 18.4%;
+  margin-left: 23.6%;
+}
+  </style>
+
+
+  <div class="menu" >
+    <h1>
+    <ul >
+      <li> <a href="/" style="color:red; padding-left:300px" > Pilot</a></li>
+      <li> <a href="/cop" style="color:red; padding-left:50px"> Co-Pilot</a></li>
+      <li> <a href="/ops" style="color:red;padding-left:50px"> Operations</a></li>
+    </ul>
+    </h1>
+  </div>
+
+    <div role="main" class="container">
+
+      <img id="roll" src="/images/Roll.png" class="roll" style="transform: rotate3d(0,0,-1, deg)">
+      
+      <img id="pitch" src="/images/Pitch.png" class="pitch" style="transform: translateY(px)">
+      <img  src="/images/CenterGravity.png" class="roll">
+      <!--end of orientation images-->
+
+ <p id="N" class="heading" style="transform:translateX(px)">N</p>
+ <p id="N2" class="heading" style="transform:translateX(px-740 )">N</p>
+ <p id="E" class="heading" style="transform:translateX(px+184)">E</p>
+ <p id="E2" class="heading" style="transform:translateX(px-552)">E</p>
+ <p id="S" class="heading" style="transform:translateX(px+368)">S</p>
+ <p id="S2" class="heading" style="transform:translateX(px-368)">S</p>
+ <p id="W" class="heading" style="transform:translateX(px+553)">W</p>
+ <p id="W2" class="heading" style="transform:translateX(px-183)">W</p>
+ <img src="/images/compass.png" class="com"  >
+
+
+
+      <h2>HUD Transformation Data</h2>
+      <p>
+        <b>Yaw:</b> <span id="alpha"></span><br>
+        <b>Pitch:</b> <span id="beta"></span><br>
+        <b>Roll:</b> <span id="gamma"></span><br>
+        <b>Heading:</b> <span id="heading"></span><br>
+        <b>Last updated:</b> <span id="timestamp"></span><br><br><br>
+        <b>Raw Data:</b> <br> <span id="rawData"> </span><br>
+      </p>
+
+      <button id="butTime" type="button">Start Timer</button>
+      <h1 id="Timer"></h1>
+      <button id="butSafe" type="button">Toggle LED</button>
+
+    </div>
+
+    <script src ="/javascripts/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+
+
+      
+var orientation  = document.getElementById("orientation");
+      var timestamp = document.getElementById("timestamp");
+      var alpha = document.getElementById("alpha");
+      var beta = document.getElementById("beta");
+      var gamma = document.getElementById("gamma");
+      var heading = document.getElementById("heading");
+      var a, b, g, mX,mY,mZ,AccX,AccY,AccZ,m;
+
+
+
+      var timerButton = document.getElementById("butTime");
+      var timer = document.getElementById("Timer");
+      var timerInt;
+
+      timer.innerText = "00:00:00";
+      timerButton.addEventListener("click", startTimer);
+      function startTimer() {
+        timer.innerText = "00:00:00";
+        timerInt = setInterval(updateTimer, 1000);
+        setTimeout(stopTimer, 15*1000);
+      }
+      function updateTimer() {
+        var d = new Date();
+        timer.innerText = d.toLocaleTimeString();
+      }
+      function stopTimer() {
+        clearInterval(timerInt);
+        timer.innerText = "Timer Stopped!";
+      }
+
+
+      var safetyButton = document.getElementById("butSafe");
+      safetyButton.addEventListener("click", sendSafetyMessage);
+      function sendSafetyMessage() {
+        socket.emit('SafetyMessage', "Shutdown");
+      }
+
+
+
+      //socket io client connection. Note, there is not need to supply server URL/Port when node is source.
+      var socket = io();
+
+      function splitMessage(message) {
+        var dataArray = message.split(' ');
+        var tempText = "";
+        for (i=0; i < dataArray.length; i++) {
+          tempText = tempText + dataArray[i] + '<br>';
+
+          if(i == 0){
+            AccX = (dataArray[i] / 100);
+          }
+          if(i == 1){
+            AccY = (dataArray[i] / 100);
+          }
+           if(i == 2){
+            AccZ = (dataArray[i] / 100);
+          }
+          if(i == 3){
+            mX = (dataArray[i] / 16);
+          }
+          if(i == 4){
+            mY = (dataArray[i] / 16);
+          }
+           if(i == 5){
+            mZ = (dataArray[i] / 16);
+          }
+          if(i == 9) {
+            a = (dataArray[i] / 16);
+            alpha.innerText = a;
+          }
+          if(i == 10){
+            b = -(dataArray[i]);
+            beta.innerText = b;
+          }    
+          if(i == 11){
+            g = (dataArray[i] / 16);
+            gamma.innerText = g;
+          }
+
+        }//end for loop
+
+            //m = Math.atan((mY*Math.cos(AccZ)-mZ*Math.sin(AccZ))/(mX*Math.cos(AccX)+mY*Math.sin(AccZ)*Math.sin(AccX)-mZ*Math.cos(AccX)*Math.sin(AccX)))
+            m = a;
+	     heading.innerText = m;
+
+        document.getElementById("rawData").innerHTML = tempText;
+      }
+
+      //working on changing HUD
+      function displayHUD(){
+        
+        if((b<=90)&&(b>= -90)) {
+          var y = "translateY(" + b + "px)";
+        }
+        if((g<=30)&&(g>= -30)) {
+          var z = "rotate3d(0,0,-1," + g + "deg)";
+        }
+
+        
+        pitch.style.webkitTransform = y;
+        pitch.style.transform = y;
+
+        roll.style.webkitTransform = z;
+        roll.style.transform = z;
+
+
+        if((m<=184)&&(m>= -183)){
+          document.getElementById("N").style.visibility = "visible";
+          var translation = "translateX("+ m +"px)" ;
+        }else{
+          document.getElementById("N").style.visibility = "hidden";
+        }
+        if((m<=184)&&(m>=554)){
+          document.getElementById("N2").style.visibility = "visible";
+          var translation4 = "translateX("+ (m-740) +"px)" ;
+        }else{
+          document.getElementById("N2").style.visibility = "hidden";
+        }
+
+        if((m<=1)&&(m>=-367)){
+          document.getElementById("E").style.visibility = "visible";
+          var translation1 = "translateX("+ (m+184) +"px)" ;
+        }else{
+          document.getElementById("E").style.visibility = "hidden";
+        }
+        if((m<=740)&&(m>=370)){
+          document.getElementById("E2").style.visibility = "visible";
+          var translation5 = "translateX("+ (m-552) +"px)" ;
+        }else{
+          document.getElementById("E2").style.visibility = "hidden";
+        }
+
+        if((m<=-183)&&(m>=-552)){
+          document.getElementById("S").style.visibility = "visible";
+          var translation2 = "translateX("+ (m+368) +"px)" ;
+        }else{
+          document.getElementById("S").style.visibility = "hidden";
+        }
+        if((a<=554)&&(a>=183)){
+          document.getElementById("S2").style.visibility = "visible";
+          var translation6 = "translateX("+ (a-368) +"px)" ;
+        }else{
+          document.getElementById("S2").style.visibility = "hidden";
+        }
+
+        if((m<=-367)&&(m>=-736)){
+          document.getElementById("W").style.visibility = "visible";
+          var translation3 = "translateX("+ (m+553) +"px)" ;
+        }else{
+          document.getElementById("W").style.visibility = "hidden";
+        }
+        if((m<=370)&&(m>=1)){
+          document.getElementById("W2").style.visibility = "visible";
+          var translation7 = "translateX("+ (m-183) +"px)" ;
+        }else{
+          document.getElementById("W2").style.visibility = "hidden";
+        }
+
+          N.style.webkitTransform = translation;
+          N.style.transform = translation;
+          N2.style.webkitTransform = translation4;
+          N2.style.transform = translation4;
+          E.style.webkitTransform = translation1;
+          E.style.transform = translation1;
+          E2.style.webkitTransform = translation5;
+          E2.style.transform = translation5;
+          S.style.webkitTransform = translation2;
+          S.style.transform = translation2;
+          S2.style.webkitTransform = translation6;
+          S2.style.transform = translation6;
+          W.style.webkitTransform = translation3;
+          W.style.transform = translation3;
+          W2.style.webkitTransform = translation7;
+          W2.style.transform = translation7;
+
+
+
+
+      }
+
+      //socket io client callback to trap 'SocketStream' named socket. Note, msg is a JSON object and not string.
+      socket.on('SocketStream',function(msg){
+        splitMessage(msg.bottomMessage);
+        displayHUD();
+      });
+
+    </script>
+  </body>
+</html>

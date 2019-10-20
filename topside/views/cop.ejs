@@ -1,0 +1,1715 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CoPilot</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "./stylesheets/main.css" />
+	<script src="./javascripts/Stopwatch.js"></script>
+	<link rel = "stylesheet" type = "text/css" href = "./stylesheets/stopwatch.css" />
+	<script src ="/javascripts/socket.io/socket.io.js"</script>
+  <script src="/javascripts/stopwatch.js"></script>
+	<script src ="/javascripts/jQuery-Knob-master/js/jquery.knob.js"</script>
+	<script src ="/javascripts/jquery-3.3.1.min.js"></script>
+</head>
+<body scroll="no" style="overflow: hidden">
+
+<div id="body">
+
+	<div class="smallcolumneighth">
+		<div class="darkgraypaddingbottom">
+			<h1>Electrical Data</h1>
+			<img src="images/Asset 1.svg" alt="electrical" class="images" width="20%" align="left">
+			<div class="numbers">
+				<h5 id="drqv"></h5>
+				<h5 id="drqv2"></h5>
+				<h5 id="drqc"></h5>
+				<h5 id="drqc2"></h5>
+			</div>
+		</div>
+		<div class="lightgray">
+			<h1>ROV CORE STATUS</h1>
+			<img id="corestatimg" alt="display" class="images check" align="center" height="80%">
+		</div>
+		<div class="darkgrayfourth">
+			<h1>Safety</h1>
+			<h1>Auto</h1>
+		</div>
+		<div class="lightgrayfourth">
+			<h1>TEMPERATURE</h1>
+			<div class="smallcolumnsixteenth">
+				<h4>Internal</h4>
+				<h3 id="inttemp"></h3>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<h4>External</h4>
+				<h3 id="exttemp"></h3>
+			</div>
+		</div>
+		<div class="darkgrayfourth">
+			<h1>PRESSURE</h1>
+			<div class="smallcolumnsixteenth">
+				<h4>Internal</h4>
+				<h3 id="intpress"></h3>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<h4>External</h4>
+				<h3 id="extpress"></h3>
+			</div>
+		</div>
+
+		<div class="lightgrayfourth">
+			<h1>TCU</h1>
+			<div class="smallcolumnsixteenth">
+				<h4>Temp</h4>
+				<h3>50 C</h3>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<h4>Humidity</h4>
+				<h3>10 C</h3>
+			</div>
+		</div>
+		<div class="darkgrayfourth">
+			<h1>Humidity</h1>
+			<h3><h3 id="humid"><h3></h3>
+		</div>
+		<div class="lightgray">
+			<h1>ERROR MESSAGES</h1>
+			<p>Error Messages Listed Here, test test test test teste </p>
+		</div>
+	</div>
+
+
+	<!--<div class="doublecolumnfourth lightgray">
+		<div class="smallcolumnhalf">
+			<div class="lightgraytop">
+				<h1>IMU CALIBRATION STATUS</h1>
+			</div>
+			</div>
+		</div>-->
+	<div class="smallcolumnfourth">
+		<div class="smallcolumneighth">
+			<div class="lightgray">
+				<h1>Mission Timer</h1>
+				<!-- Display the countdown timer in an element -->
+				<!--
+				  Inspired by Lorenzo Perniciaro
+				  https://dribbble.com/shots/2840735-Stopwatch-Concept
+				-->
+				<div class="clock-wrapper" opacity="0.0">
+				  <div class="clock">
+				    <div class="clock__inner-bg" opacity="0.0"></div>
+
+				    <div class="clock__inner-bg" opacity="0.0">
+				      <div class="clock__markers" opacity="0.0">
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				        <div class="clock__mark"></div>
+				      </div>
+				    </div>
+
+
+
+				    <!--<div class="clock__inners" opacity="0.0">
+				      <div class="clock__inner-center" opacity="0.0"></div>
+				      <div class="clock__inner-center" opacity="0.0"></div>
+				      <div class="clock__inner-center" opacity="0.0"></div>
+				    </div>-->
+
+ 							<div class="clock__pointer" opacity="0.0"></div>
+
+							<svg class="svg" xmlns="http://www.w3.org/2000/svg" opacity="0.0">
+				      <!-- Created with Method Draw - https://github.com/duopixel/Method-Draw/ -->
+				      <defs opacity="0.0">
+				        <radialGradient opacity="0.0" gradientTransform="translate(1,0.5) scale(-0.99,1)" r="1.200581" cy="0" cx="0" spreadMethod="pad" id="svg_9">
+				          <stop offset="0" stop-opacity="0.996094" stop-color="#ff415a"/>
+				          <stop offset="1" stop-opacity="0" stop-color="#252525"/>
+				        </radialGradient>
+				      </defs>
+				      <g>
+				        <title>Layer 1</title>
+				        <ellipse opacity="0.0" stroke="url(#svg_9)" ry="21.5%" rx="21.5%" id="svg_1" cy="50%" cx="50%" stroke-width="12%" fill="transparent"/>
+				      </g>
+				    </svg>
+				  </div>
+
+				  <span class="clock-time">00:00,000</span>
+
+				  <div class="clock-buttons">
+				    <button type="button" class="clock-button btn" data-role="clock-reset">
+				      <span class="clock-button__text">Reset</span>
+				    </button>
+
+				    <button type="button" class="clock-button clock-button--start btn2" data-role="clock-start-stop">
+				      <span class="clock-button__text">Start</span>
+				    </button>
+				  </div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="smallcolumneighth">
+			<div class="darkgray">
+				<h1>Depth Indicator</h1>
+				<img src="images/Depth Indicator.svg" alt="Depth" height="110em" class="images" align="left">
+				<p></p>
+				<h6>&nbsp; &nbsp; -10m</h6>
+			</div>
+		</div>
+
+		<div class="medgraylong">
+			<h1>&nbsp;</h1>
+			<h1>&nbsp;</h1>
+			<button id="liftBag" value="Locked" type="button" class="btn2 wide" onclick="toggleLiftBag(); changeLiftBagColor(); sendLiftBagMessage;">Lift Bag Locked</button>
+			<h1>&nbsp;</h1>
+			<h1>&nbsp;</h1>
+			<hr>
+			<h1>&nbsp;</h1>
+			<h1>Handle Turner</h1>
+			<div class="smallcolumnsixteenth">
+				<img src="./images/left-arrow.svg" alt="left arrow" width="20%"></img>
+				<h1>&nbsp;</h1>
+				<button id="handleTurn" value="0" type="button" class="btn1">Counter Clockwise</button>
+			</div>
+
+			<div class="smallcolumnsixteenth">
+				<img src="./images/right-arrow.svg" alt="right arrow" width="20%"></img>
+				<h1>&nbsp;</h1>
+				<button id="handleTurn" value="1" type="button" class="btn1">Clockwise</button>
+			</div>
+
+		</div>
+
+		<div class="lightgraylong">
+			<div class="smallcolumneighth1">
+				<div class="darkgray1">
+					<h1>Thruster One</h1>
+					<p>&nbsp;</p>
+					<div class="half">
+						<input id="HorizontalThrusterPower1" type="text"  class="dial" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+					</div>
+					<div class="half">
+						<input class="knob" data-angleOffset="-125" data-min: "0" data-max="5" data-angleArc = "250" value="5" data-height="80em" data-width="80em" autocomplete="off" data-readOnly=true data-fgColor="#3463af" shaded= "1" shadeColor="#a538c9"/>
+						<script>
+						    $(function(){
+						        $('.knob').knob({
+						            draw : function () {
+						                var a = this.angle(this.cv)  // Angle
+						                , sa = this.startAngle          // Previous start angle
+						                , sat = this.startAngle         // Start angle
+						                , ea                            // Previous end angle
+						                , eat = sat + a                 // End angle
+						                , r = 1;
+
+						                this.g.lineWidth = this.lineWidth;
+
+						                if(this.$.attr('shaded')){
+						                    var color1 = r ? this.o.fgColor : this.fgColor;
+						                    var color2 = this.$.attr('shadeColor') ? this.$.attr('shadeColor') : '#ffffff';
+						                    var grad = getGradient(color2, color1);
+
+						                    var saDeg = parseInt((sa * 180 / Math.PI) % 360);
+						                    var eatDeg = parseInt((eat * 180 / Math.PI) % 360);
+
+						                    for(var angle = saDeg;(angle % 360) != eatDeg;angle++){
+						                        sat = angle * (Math.PI / 180);
+						                        eat = (angle + 2) * (Math.PI / 180);
+
+						                        if(grad.color2[0] != grad.color1[0] && (angle + 1) % grad.steps[0] == 0){
+						                            grad.color1[0] += grad.adder[0];
+						                        }
+						                        if(grad.color2[1] != grad.color1[1] && (angle + 1) % grad.steps[1] == 0){
+						                            grad.color1[1] += grad.adder[1];
+						                        }
+						                        if(grad.color2[2] != grad.color1[2] && (angle + 1) % grad.steps[2] == 0){
+						                            grad.color1[2] += grad.adder[2];
+						                        }
+
+						                        color = '#' + toHex(grad.color1[0]) + toHex(grad.color1[1]) + toHex(grad.color1[2]);
+
+						                        this.g.beginPath();
+						                        this.g.strokeStyle = color;
+						                        this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+						                        this.g.stroke();
+						                    }
+						                } else {
+						                    this.g.beginPath();
+						                    this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+						                    this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+						                    this.g.stroke();
+						                }
+
+						                return false;
+						            }
+						        });
+						    });
+
+						    function getGradient(color1, color2){
+						        var ret = new Object();
+
+						        ret.color1 = new Array();
+						        ret.color2 = new Array();
+						        ret.steps = new Array();
+						        ret.adder = new Array();
+
+						        color1 = color1.replace('#','');
+						        ret.color1[0] = parseInt(color1.slice(0,2), 16),
+						        ret.color1[1] = parseInt(color1.slice(2,4), 16),
+						        ret.color1[2] = parseInt(color1.slice(4,6), 16);
+
+						        color2 = color2.replace('#','');
+						        ret.color2[0] = parseInt(color2.slice(0,2), 16),
+						        ret.color2[1] = parseInt(color2.slice(2,4), 16),
+						        ret.color2[2] = parseInt(color2.slice(4,6), 16);
+
+						        ret.steps[0] = (ret.color1[0] == ret.color2[0])? 0 : parseInt(360 / Math.abs(ret.color1[0] - ret.color2[0])),
+						        ret.steps[1] = (ret.color1[1] == ret.color2[1])? 0 : parseInt(360 / Math.abs(ret.color1[1] - ret.color2[1])),
+						        ret.steps[2] = (ret.color1[2] == ret.color2[2])? 0 : parseInt(360 / Math.abs(ret.color1[2] - ret.color2[2])),
+
+						        ret.adder[0] = (ret.color1[0] > ret.color2[0])? -1 : 1;
+						        ret.adder[1] = (ret.color1[1] > ret.color2[1])? -1 : 1;
+						        ret.adder[2] = (ret.color1[2] > ret.color2[2])? -1 : 1;
+
+						        return ret;
+						    }
+
+						    function toHex(number){
+						        number = number.toString(16);
+						        if(number.length < 2){
+						            number = '0' + number;
+						        }
+						        return number;
+						    }
+						</script>
+<!--
+						<input id="EnginePower1" value="3" type="text" class="dial1" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+						<script>
+					   $(function() {
+					        $(".dial1").knob(
+										 //'min': 0,
+										//'max': 5,
+										//'width': 80,
+										//'height': 80,
+										//'fgColor': "blue",
+										//'thickness': 0.3,
+										//'angleOffset': -125,
+										//'angleArc': 250
+									);
+					    });
+						</script>
+-->
+					</div>
+				</div>
+				<div class="medgray1">
+					<h1>Thruster Two</h1>
+					<p>&nbsp;</p>
+					<div class="half">
+						<input id="VerticalThrusterPower2" type="text"  class="dial" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+					</div>
+					<div class="half">
+						<input class="knob" data-angleOffset="-125" data-min: "0" data-max="5" data-angleArc = "250" value="5" data-height="80em" data-width="80em" autocomplete="off" data-readOnly=true data-fgColor="#3463af" shaded= "1" shadeColor="#a538c9"/>
+						<script>
+								$(function(){
+										$('.knob').knob({
+												draw : function () {
+														var a = this.angle(this.cv)  // Angle
+														, sa = this.startAngle          // Previous start angle
+														, sat = this.startAngle         // Start angle
+														, ea                            // Previous end angle
+														, eat = sat + a                 // End angle
+														, r = 1;
+
+														this.g.lineWidth = this.lineWidth;
+
+														if(this.$.attr('shaded')){
+																var color1 = r ? this.o.fgColor : this.fgColor;
+																var color2 = this.$.attr('shadeColor') ? this.$.attr('shadeColor') : '#ffffff';
+																var grad = getGradient(color2, color1);
+
+																var saDeg = parseInt((sa * 180 / Math.PI) % 360);
+																var eatDeg = parseInt((eat * 180 / Math.PI) % 360);
+
+																for(var angle = saDeg;(angle % 360) != eatDeg;angle++){
+																		sat = angle * (Math.PI / 180);
+																		eat = (angle + 2) * (Math.PI / 180);
+
+																		if(grad.color2[0] != grad.color1[0] && (angle + 1) % grad.steps[0] == 0){
+																				grad.color1[0] += grad.adder[0];
+																		}
+																		if(grad.color2[1] != grad.color1[1] && (angle + 1) % grad.steps[1] == 0){
+																				grad.color1[1] += grad.adder[1];
+																		}
+																		if(grad.color2[2] != grad.color1[2] && (angle + 1) % grad.steps[2] == 0){
+																				grad.color1[2] += grad.adder[2];
+																		}
+
+																		color = '#' + toHex(grad.color1[0]) + toHex(grad.color1[1]) + toHex(grad.color1[2]);
+
+																		this.g.beginPath();
+																		this.g.strokeStyle = color;
+																		this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																		this.g.stroke();
+																}
+														} else {
+																this.g.beginPath();
+																this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+																this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																this.g.stroke();
+														}
+
+														return false;
+												}
+										});
+								});
+
+								function getGradient(color1, color2){
+										var ret = new Object();
+
+										ret.color1 = new Array();
+										ret.color2 = new Array();
+										ret.steps = new Array();
+										ret.adder = new Array();
+
+										color1 = color1.replace('#','');
+										ret.color1[0] = parseInt(color1.slice(0,2), 16),
+										ret.color1[1] = parseInt(color1.slice(2,4), 16),
+										ret.color1[2] = parseInt(color1.slice(4,6), 16);
+
+										color2 = color2.replace('#','');
+										ret.color2[0] = parseInt(color2.slice(0,2), 16),
+										ret.color2[1] = parseInt(color2.slice(2,4), 16),
+										ret.color2[2] = parseInt(color2.slice(4,6), 16);
+
+										ret.steps[0] = (ret.color1[0] == ret.color2[0])? 0 : parseInt(360 / Math.abs(ret.color1[0] - ret.color2[0])),
+										ret.steps[1] = (ret.color1[1] == ret.color2[1])? 0 : parseInt(360 / Math.abs(ret.color1[1] - ret.color2[1])),
+										ret.steps[2] = (ret.color1[2] == ret.color2[2])? 0 : parseInt(360 / Math.abs(ret.color1[2] - ret.color2[2])),
+
+										ret.adder[0] = (ret.color1[0] > ret.color2[0])? -1 : 1;
+										ret.adder[1] = (ret.color1[1] > ret.color2[1])? -1 : 1;
+										ret.adder[2] = (ret.color1[2] > ret.color2[2])? -1 : 1;
+
+										return ret;
+								}
+
+								function toHex(number){
+										number = number.toString(16);
+										if(number.length < 2){
+												number = '0' + number;
+										}
+										return number;
+								}
+						</script>
+<!--
+						<input id="EnginePower1" value="3" type="text" class="dial1" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+						<script>
+						 $(function() {
+									$(".dial1").knob(
+										 //'min': 0,
+										//'max': 5,
+										//'width': 80,
+										//'height': 80,
+										//'fgColor': "blue",
+										//'thickness': 0.3,
+										//'angleOffset': -125,
+										//'angleArc': 250
+									);
+							});
+						</script>
+-->
+					</div>
+				</div>
+				<div class="darkgray1">
+					<h1>Thruster Three</h1>
+					<p>&nbsp;</p>
+					<div class="half">
+						<input id="HorizontalThrusterPower3" type="text"  class="dial" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+					</div>
+					<div class="half">
+						<input class="knob" data-angleOffset="-125" data-min: "0" data-max="5" data-angleArc = "250" value="5" data-height="80em" data-width="80em" autocomplete="off" data-readOnly=true data-fgColor="#AD2D39" shaded= "1" shadeColor="#2EA2CB"/>
+						<script>
+								$(function(){
+										$('.knob').knob({
+												draw : function () {
+														var a = this.angle(this.cv)  // Angle
+														, sa = this.startAngle          // Previous start angle
+														, sat = this.startAngle         // Start angle
+														, ea                            // Previous end angle
+														, eat = sat + a                 // End angle
+														, r = 1;
+
+														this.g.lineWidth = this.lineWidth;
+
+														if(this.$.attr('shaded')){
+																var color1 = r ? this.o.fgColor : this.fgColor;
+																var color2 = this.$.attr('shadeColor') ? this.$.attr('shadeColor') : '#ffffff';
+																var grad = getGradient(color2, color1);
+
+																var saDeg = parseInt((sa * 180 / Math.PI) % 360);
+																var eatDeg = parseInt((eat * 180 / Math.PI) % 360);
+
+																for(var angle = saDeg;(angle % 360) != eatDeg;angle++){
+																		sat = angle * (Math.PI / 180);
+																		eat = (angle + 2) * (Math.PI / 180);
+
+																		if(grad.color2[0] != grad.color1[0] && (angle + 1) % grad.steps[0] == 0){
+																				grad.color1[0] += grad.adder[0];
+																		}
+																		if(grad.color2[1] != grad.color1[1] && (angle + 1) % grad.steps[1] == 0){
+																				grad.color1[1] += grad.adder[1];
+																		}
+																		if(grad.color2[2] != grad.color1[2] && (angle + 1) % grad.steps[2] == 0){
+																				grad.color1[2] += grad.adder[2];
+																		}
+
+																		color = '#' + toHex(grad.color1[0]) + toHex(grad.color1[1]) + toHex(grad.color1[2]);
+
+																		this.g.beginPath();
+																		this.g.strokeStyle = color;
+																		this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																		this.g.stroke();
+																}
+														} else {
+																this.g.beginPath();
+																this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+																this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																this.g.stroke();
+														}
+
+														return false;
+												}
+										});
+								});
+
+								function getGradient(color1, color2){
+										var ret = new Object();
+
+										ret.color1 = new Array();
+										ret.color2 = new Array();
+										ret.steps = new Array();
+										ret.adder = new Array();
+
+										color1 = color1.replace('#','');
+										ret.color1[0] = parseInt(color1.slice(0,2), 16),
+										ret.color1[1] = parseInt(color1.slice(2,4), 16),
+										ret.color1[2] = parseInt(color1.slice(4,6), 16);
+
+										color2 = color2.replace('#','');
+										ret.color2[0] = parseInt(color2.slice(0,2), 16),
+										ret.color2[1] = parseInt(color2.slice(2,4), 16),
+										ret.color2[2] = parseInt(color2.slice(4,6), 16);
+
+										ret.steps[0] = (ret.color1[0] == ret.color2[0])? 0 : parseInt(360 / Math.abs(ret.color1[0] - ret.color2[0])),
+										ret.steps[1] = (ret.color1[1] == ret.color2[1])? 0 : parseInt(360 / Math.abs(ret.color1[1] - ret.color2[1])),
+										ret.steps[2] = (ret.color1[2] == ret.color2[2])? 0 : parseInt(360 / Math.abs(ret.color1[2] - ret.color2[2])),
+
+										ret.adder[0] = (ret.color1[0] > ret.color2[0])? -1 : 1;
+										ret.adder[1] = (ret.color1[1] > ret.color2[1])? -1 : 1;
+										ret.adder[2] = (ret.color1[2] > ret.color2[2])? -1 : 1;
+
+										return ret;
+								}
+
+								function toHex(number){
+										number = number.toString(16);
+										if(number.length < 2){
+												number = '0' + number;
+										}
+										return number;
+								}
+						</script>
+<!--
+						<input id="EnginePower1" value="3" type="text" class="dial1" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+						<script>
+						 $(function() {
+									$(".dial1").knob(
+										 //'min': 0,
+										//'max': 5,
+										//'width': 80,
+										//'height': 80,
+										//'fgColor': "blue",
+										//'thickness': 0.3,
+										//'angleOffset': -125,
+										//'angleArc': 250
+									);
+							});
+						</script>
+-->
+					</div>
+				</div>
+			</div>
+			<div class="smallcolumneighth1">
+				<div class="medgray1">
+					<h1>Thruster Four</h1>
+					<p>&nbsp;</p>
+					<div class="half">
+						<input id="HorizontalThrusterPower4" type="text"  class="dial" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+					</div>
+					<div class="half">
+						<input class="knob" data-angleOffset="-125" data-min: "0" data-max="5" data-angleArc = "250" value="5" data-height="80em" data-width="80em" autocomplete="off" data-readOnly=true data-fgColor="#3463af" shaded= "1" shadeColor="#a538c9"/>
+						<script>
+								$(function(){
+										$('.knob').knob({
+												draw : function () {
+														var a = this.angle(this.cv)  // Angle
+														, sa = this.startAngle          // Previous start angle
+														, sat = this.startAngle         // Start angle
+														, ea                            // Previous end angle
+														, eat = sat + a                 // End angle
+														, r = 1;
+
+														this.g.lineWidth = this.lineWidth;
+
+														if(this.$.attr('shaded')){
+																var color1 = r ? this.o.fgColor : this.fgColor;
+																var color2 = this.$.attr('shadeColor') ? this.$.attr('shadeColor') : '#ffffff';
+																var grad = getGradient(color2, color1);
+
+																var saDeg = parseInt((sa * 180 / Math.PI) % 360);
+																var eatDeg = parseInt((eat * 180 / Math.PI) % 360);
+
+																for(var angle = saDeg;(angle % 360) != eatDeg;angle++){
+																		sat = angle * (Math.PI / 180);
+																		eat = (angle + 2) * (Math.PI / 180);
+
+																		if(grad.color2[0] != grad.color1[0] && (angle + 1) % grad.steps[0] == 0){
+																				grad.color1[0] += grad.adder[0];
+																		}
+																		if(grad.color2[1] != grad.color1[1] && (angle + 1) % grad.steps[1] == 0){
+																				grad.color1[1] += grad.adder[1];
+																		}
+																		if(grad.color2[2] != grad.color1[2] && (angle + 1) % grad.steps[2] == 0){
+																				grad.color1[2] += grad.adder[2];
+																		}
+
+																		color = '#' + toHex(grad.color1[0]) + toHex(grad.color1[1]) + toHex(grad.color1[2]);
+
+																		this.g.beginPath();
+																		this.g.strokeStyle = color;
+																		this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																		this.g.stroke();
+																}
+														} else {
+																this.g.beginPath();
+																this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+																this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																this.g.stroke();
+														}
+
+														return false;
+												}
+										});
+								});
+
+								function getGradient(color1, color2){
+										var ret = new Object();
+
+										ret.color1 = new Array();
+										ret.color2 = new Array();
+										ret.steps = new Array();
+										ret.adder = new Array();
+
+										color1 = color1.replace('#','');
+										ret.color1[0] = parseInt(color1.slice(0,2), 16),
+										ret.color1[1] = parseInt(color1.slice(2,4), 16),
+										ret.color1[2] = parseInt(color1.slice(4,6), 16);
+
+										color2 = color2.replace('#','');
+										ret.color2[0] = parseInt(color2.slice(0,2), 16),
+										ret.color2[1] = parseInt(color2.slice(2,4), 16),
+										ret.color2[2] = parseInt(color2.slice(4,6), 16);
+
+										ret.steps[0] = (ret.color1[0] == ret.color2[0])? 0 : parseInt(360 / Math.abs(ret.color1[0] - ret.color2[0])),
+										ret.steps[1] = (ret.color1[1] == ret.color2[1])? 0 : parseInt(360 / Math.abs(ret.color1[1] - ret.color2[1])),
+										ret.steps[2] = (ret.color1[2] == ret.color2[2])? 0 : parseInt(360 / Math.abs(ret.color1[2] - ret.color2[2])),
+
+										ret.adder[0] = (ret.color1[0] > ret.color2[0])? -1 : 1;
+										ret.adder[1] = (ret.color1[1] > ret.color2[1])? -1 : 1;
+										ret.adder[2] = (ret.color1[2] > ret.color2[2])? -1 : 1;
+
+										return ret;
+								}
+
+								function toHex(number){
+										number = number.toString(16);
+										if(number.length < 2){
+												number = '0' + number;
+										}
+										return number;
+								}
+						</script>
+<!--
+						<input id="EnginePower1" value="3" type="text" class="dial1" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+						<script>
+						 $(function() {
+									$(".dial1").knob(
+										 //'min': 0,
+										//'max': 5,
+										//'width': 80,
+										//'height': 80,
+										//'fgColor': "blue",
+										//'thickness': 0.3,
+										//'angleOffset': -125,
+										//'angleArc': 250
+									);
+							});
+						</script>
+-->
+					</div>
+				</div>
+				<div class="darkgray1">
+					<h1>Thruster Five</h1>
+					<p>&nbsp;</p>
+					<div class="half">
+						<input id="VerticalThrusterPower5" type="text"  class="dial" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+					</div>
+					<div class="half">
+						<input class="knob" data-angleOffset="-125" data-min: "0" data-max="5" data-angleArc = "250" value="5" data-height="80em" data-width="80em" autocomplete="off" data-readOnly=true data-fgColor="#3463af" shaded= "1" shadeColor="#a538c9"/>
+						<script>
+								$(function(){
+										$('.knob').knob({
+												draw : function () {
+														var a = this.angle(this.cv)  // Angle
+														, sa = this.startAngle          // Previous start angle
+														, sat = this.startAngle         // Start angle
+														, ea                            // Previous end angle
+														, eat = sat + a                 // End angle
+														, r = 1;
+
+														this.g.lineWidth = this.lineWidth;
+
+														if(this.$.attr('shaded')){
+																var color1 = r ? this.o.fgColor : this.fgColor;
+																var color2 = this.$.attr('shadeColor') ? this.$.attr('shadeColor') : '#ffffff';
+																var grad = getGradient(color2, color1);
+
+																var saDeg = parseInt((sa * 180 / Math.PI) % 360);
+																var eatDeg = parseInt((eat * 180 / Math.PI) % 360);
+
+																for(var angle = saDeg;(angle % 360) != eatDeg;angle++){
+																		sat = angle * (Math.PI / 180);
+																		eat = (angle + 2) * (Math.PI / 180);
+
+																		if(grad.color2[0] != grad.color1[0] && (angle + 1) % grad.steps[0] == 0){
+																				grad.color1[0] += grad.adder[0];
+																		}
+																		if(grad.color2[1] != grad.color1[1] && (angle + 1) % grad.steps[1] == 0){
+																				grad.color1[1] += grad.adder[1];
+																		}
+																		if(grad.color2[2] != grad.color1[2] && (angle + 1) % grad.steps[2] == 0){
+																				grad.color1[2] += grad.adder[2];
+																		}
+
+																		color = '#' + toHex(grad.color1[0]) + toHex(grad.color1[1]) + toHex(grad.color1[2]);
+
+																		this.g.beginPath();
+																		this.g.strokeStyle = color;
+																		this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																		this.g.stroke();
+																}
+														} else {
+																this.g.beginPath();
+																this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+																this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																this.g.stroke();
+														}
+
+														return false;
+												}
+										});
+								});
+
+								function getGradient(color1, color2){
+										var ret = new Object();
+
+										ret.color1 = new Array();
+										ret.color2 = new Array();
+										ret.steps = new Array();
+										ret.adder = new Array();
+
+										color1 = color1.replace('#','');
+										ret.color1[0] = parseInt(color1.slice(0,2), 16),
+										ret.color1[1] = parseInt(color1.slice(2,4), 16),
+										ret.color1[2] = parseInt(color1.slice(4,6), 16);
+
+										color2 = color2.replace('#','');
+										ret.color2[0] = parseInt(color2.slice(0,2), 16),
+										ret.color2[1] = parseInt(color2.slice(2,4), 16),
+										ret.color2[2] = parseInt(color2.slice(4,6), 16);
+
+										ret.steps[0] = (ret.color1[0] == ret.color2[0])? 0 : parseInt(360 / Math.abs(ret.color1[0] - ret.color2[0])),
+										ret.steps[1] = (ret.color1[1] == ret.color2[1])? 0 : parseInt(360 / Math.abs(ret.color1[1] - ret.color2[1])),
+										ret.steps[2] = (ret.color1[2] == ret.color2[2])? 0 : parseInt(360 / Math.abs(ret.color1[2] - ret.color2[2])),
+
+										ret.adder[0] = (ret.color1[0] > ret.color2[0])? -1 : 1;
+										ret.adder[1] = (ret.color1[1] > ret.color2[1])? -1 : 1;
+										ret.adder[2] = (ret.color1[2] > ret.color2[2])? -1 : 1;
+
+										return ret;
+								}
+
+								function toHex(number){
+										number = number.toString(16);
+										if(number.length < 2){
+												number = '0' + number;
+										}
+										return number;
+								}
+						</script>
+<!--
+						<input id="EnginePower1" value="3" type="text" class="dial1" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+						<script>
+						 $(function() {
+									$(".dial1").knob(
+										 //'min': 0,
+										//'max': 5,
+										//'width': 80,
+										//'height': 80,
+										//'fgColor': "blue",
+										//'thickness': 0.3,
+										//'angleOffset': -125,
+										//'angleArc': 250
+									);
+							});
+						</script>
+-->
+					</div>
+				</div>
+				<div class="medgray1">
+					<h1>Thruster Six</h1>
+					<p>&nbsp;</p>
+					<div class="half">
+						<input id="HorizontalThrusterPower6" type="text"  class="dial" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+					</div>
+					<div class="half">
+						<input class="knob" data-angleOffset="-125" data-min: "0" data-max="5" data-angleArc = "250" value="3" data-height="80em" data-width="80em" autocomplete="off" data-readOnly=true data-fgColor="#3463af" shaded= "1" shadeColor="#a538c9"/>
+						<script>
+								$(function(){
+										$('.knob').knob({
+												draw : function () {
+														var a = this.angle(this.cv)  // Angle
+														, sa = this.startAngle          // Previous start angle
+														, sat = this.startAngle         // Start angle
+														, ea                            // Previous end angle
+														, eat = sat + a                 // End angle
+														, r = 1;
+
+														this.g.lineWidth = this.lineWidth;
+
+														if(this.$.attr('shaded')){
+																var color1 = r ? this.o.fgColor : this.fgColor;
+																var color2 = this.$.attr('shadeColor') ? this.$.attr('shadeColor') : '#ffffff';
+																var grad = getGradient(color2, color1);
+
+																var saDeg = parseInt((sa * 180 / Math.PI) % 360);
+																var eatDeg = parseInt((eat * 180 / Math.PI) % 360);
+
+																for(var angle = saDeg;(angle % 360) != eatDeg;angle++){
+																		sat = angle * (Math.PI / 180);
+																		eat = (angle + 2) * (Math.PI / 180);
+
+																		if(grad.color2[0] != grad.color1[0] && (angle + 1) % grad.steps[0] == 0){
+																				grad.color1[0] += grad.adder[0];
+																		}
+																		if(grad.color2[1] != grad.color1[1] && (angle + 1) % grad.steps[1] == 0){
+																				grad.color1[1] += grad.adder[1];
+																		}
+																		if(grad.color2[2] != grad.color1[2] && (angle + 1) % grad.steps[2] == 0){
+																				grad.color1[2] += grad.adder[2];
+																		}
+
+																		color = '#' + toHex(grad.color1[0]) + toHex(grad.color1[1]) + toHex(grad.color1[2]);
+
+																		this.g.beginPath();
+																		this.g.strokeStyle = color;
+																		this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																		this.g.stroke();
+																}
+														} else {
+																this.g.beginPath();
+																this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+																this.g.arc(this.xy, this.xy, this.radius, sat, eat, false);
+																this.g.stroke();
+														}
+
+														return false;
+												}
+										});
+								});
+
+								function getGradient(color1, color2){
+										var ret = new Object();
+
+										ret.color1 = new Array();
+										ret.color2 = new Array();
+										ret.steps = new Array();
+										ret.adder = new Array();
+
+										color1 = color1.replace('#','');
+										ret.color1[0] = parseInt(color1.slice(0,2), 16),
+										ret.color1[1] = parseInt(color1.slice(2,4), 16),
+										ret.color1[2] = parseInt(color1.slice(4,6), 16);
+
+										color2 = color2.replace('#','');
+										ret.color2[0] = parseInt(color2.slice(0,2), 16),
+										ret.color2[1] = parseInt(color2.slice(2,4), 16),
+										ret.color2[2] = parseInt(color2.slice(4,6), 16);
+
+										ret.steps[0] = (ret.color1[0] == ret.color2[0])? 0 : parseInt(360 / Math.abs(ret.color1[0] - ret.color2[0])),
+										ret.steps[1] = (ret.color1[1] == ret.color2[1])? 0 : parseInt(360 / Math.abs(ret.color1[1] - ret.color2[1])),
+										ret.steps[2] = (ret.color1[2] == ret.color2[2])? 0 : parseInt(360 / Math.abs(ret.color1[2] - ret.color2[2])),
+
+										ret.adder[0] = (ret.color1[0] > ret.color2[0])? -1 : 1;
+										ret.adder[1] = (ret.color1[1] > ret.color2[1])? -1 : 1;
+										ret.adder[2] = (ret.color1[2] > ret.color2[2])? -1 : 1;
+
+										return ret;
+								}
+
+								function toHex(number){
+										number = number.toString(16);
+										if(number.length < 2){
+												number = '0' + number;
+										}
+										return number;
+								}
+						</script>
+<!--
+						<input id="EnginePower1" value="3" type="text" class="dial1" data-height="80em" data-displayInput="true" readOnly="true" data-displayPrevious="false">
+						<script>
+						 $(function() {
+									$(".dial1").knob(
+										 //'min': 0,
+										//'max': 5,
+										//'width': 80,
+										//'height': 80,
+										//'fgColor': "blue",
+										//'thickness': 0.3,
+										//'angleOffset': -125,
+										//'angleArc': 250
+									);
+							});
+						</script>
+-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="widecolumn">
+		<div class="lightgraylong2">
+			<p>Video Feed</p>
+					<script>
+					// Set the BaseURL to the URL of your camera
+					//Example: var BaseURL = "http://172.21.1.122/";
+
+					var BaseURL = "http://http://192.168.1.201/";
+
+					// The two following lines need to be changed if an an AXIS 241S(A)/241Q(A)/240Q/243SA is used:
+
+					var Camera = ""; // If you use an AXIS 240Q/241S(A)/241Q(A)/243SA, comment away this line by inserting "//"
+					// var Camera = "n"; // Change n to the Video source used in the AXIS 240Q/ 241S(A)/241Q(A)/243SA and remove "//"
+
+					// Go to the camera used and remove the "//" in front of the ImageResolution to be used.
+					// Note that only one can be enabled at a time.
+
+					// List of additional available resolutions is shown in the product's configuration.
+
+					// AXIS 207/210/210A/211/211A/212 PTZ/216FD/221/225FD
+					// var ImageResolution = "320x240";var DisplayWidth = "320";var DisplayHeight = "240";
+					// var ImageResolution = "640x480";var DisplayWidth = "640";var DisplayHeight = "480";
+
+					// AXIS 213 PTZ/214 PTZ/231D(+)/232D(+)/240Q/241S(A)/241Q(A)/243SA PAL
+					// var ImageResolution = "352x288";var DisplayWidth = "352";var DisplayHeight = "288";
+					// var ImageResolution = "704x576";var DisplayWidth = "704";var DisplayHeight = "576";
+
+					// AXIS 213 PTZ/214 PTZ/231D(+)/232D(+)/240Q/241S(A)/241Q(A)/243SA NTSC
+					// var ImageResolution = "352x240";var DisplayWidth = "352";var DisplayHeight = "240";
+					 var ImageResolution = "704x480";var DisplayWidth = "704";var DisplayHeight = "480";
+
+					// This is the path to the image generating file inside the camera itself
+					var File = "axis-cgi/mjpg/video.cgi?resolution="+ImageResolution;
+					// No changes required below this point
+					if (Camera != "") {File += "&camera=" + Camera;}
+					var output = "";
+					if ((navigator.appName == "Microsoft Internet Explorer") &&
+					(navigator.platform != "MacPPC") && (navigator.platform != "Mac68k"))
+					{
+					// If Internet Explorer under Windows then use ActiveX
+					output = '<OBJECT ID="Player" width='
+					output += DisplayWidth;
+					output += ' height=';
+					output += DisplayHeight;
+					output += ' CLASSID="CLSID:DE625294-70E6-45ED-B895-CFFA13AEB044" ';
+					output += 'CODEBASE="';
+					output += BaseURL;
+					output += 'activex/AMC.cab">';
+					output += '<PARAM NAME="MediaURL" VALUE="';
+					output += BaseURL;
+					output += File + '">';
+					output += '<param name="MediaType" value="mjpeg-unicast">';
+					output += '<param name="ShowStatusBar" value="0">';
+					output += '<param name="ShowToolbar" value="0">';
+					output += '<param name="AutoStart" value="1">';
+					output += '<param name="StretchToFit" value="1">';
+					output += '<BR><B>Axis Media Control</B><BR>';
+					output += 'The AXIS Media Control, which enables you ';
+					output += 'to view live image streams in Microsoft Internet';
+					output += ' Explorer, could not be registered on your computer.';
+					output += '<BR></OBJECT>';
+					} else {
+					// If not IE for Windows use the browser itself to display
+					theDate = new Date();
+					output = '<IMG SRC="';
+					output += BaseURL;
+					output += File;
+					output += '&dummy=' + theDate.getTime().toString(10);
+					output += '" HEIGHT="';
+					output += DisplayHeight;
+					output += '" WIDTH="';
+					output += DisplayWidth;
+					output += '" ALT="Camera Image">';
+					
+					document.write(output);
+					document.Player. = "play,+snapshot,+fullscreen";
+				}
+
+					</script>
+		</div>
+		<div class="darkgraylong2">
+			<div class="smallcolumneigth leftalign">
+				<h1>Task One Aircraft</h1>
+				<label class="container">
+					<p>Use Flight Data to Determine Search Zone</p>
+					<input type="checkbox" checked="checked">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Identify Aircraft Using Tail</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Remove Debris From Engine Using Lift Bag</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Return Engine to Surface Side of Pool Using Lift Bag</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Return All Lift Bags To Surface</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<p>&nbsp;</p>
+				<h1>Task Two Earthquakes</h1>
+				<label class="container">
+					<p>Insert Cable and Power OBS</p>
+					<input type="checkbox" checked="checked">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Level OBS using Wifi Data</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Graph Seismograph Data</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<p>&nbsp;</p>
+				<h1>Task Three Energy</h1>
+				<label class="container">
+					<p>Determine Location for Tidal Turbine</p>
+					<input type="checkbox" checked="checked">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Install Tidal Turbine</p>
+			  <input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+			  <p>Install I-AMP</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Place Mooring 10cm Away from Base</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+				<label class="container">
+					<p>Suspend ADV Within 10cm From Bottom of Mooring Line</p>
+					<input type="checkbox">
+					<span class="checkmark"></span>
+				</label>
+			</div>
+		</div>
+	</div>
+  <div class="smallcolumneighth">
+		<div class="darkgraysmallest">
+			<div class="smallcolumnsixteenth">
+				<button id="video1" value="1" type="button" class="btn">Camera 1</button>
+			</div>
+
+			<div class="smallcolumnsixteenth">
+				<button id="video2" value="2" type="button" class="btn">Camera 2</button>
+			</div>
+		</div>
+		<div class="lightgraysmallest">
+			<div class="smallcolumnsixteenth">
+				<button id="video3" value="3" type="button" class="btn">Camera 3</button>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<button id="video4" value="4" type="button" class="btn">Camera 4</button>
+			</div>
+		</div>
+		<div class="darkgraysmallest">
+			<div class="smallcolumnsixteenth">
+				<button id="video5" value="5" type="button" class="btn">Camera 5</button>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<button id="video6" value="6" type="button" class="btn">Camera 6</button>
+			</div>
+		</div>
+		 <div class="lightgraysmallest">
+			<div class="smallcolumnsixteenth">
+				<button id="video7" value="7" type="button" class="btn">Camera 7</button>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<button id="video8" value="8" type="button" class="btn">Camera 8</button>
+			</div>
+		</div>
+		<div class="darkgraysmallest">
+			<div class="smallcolumnsixteenth">
+				<button id="butThruster" value="OFF" type="button" class="btn wide">Thrusters Disabled</button>
+			</div>
+		</div>
+		<div class="lightgraysmallest">
+			<div class="smallcolumnsixteenth">
+				<button id="backOnly" value="ON" type="button" onclick="toggleBackState(); changeBackColor(); sendBackMessage();" class="btn">Back Only Disabled</button>
+			</div>
+			<div class="smallcolumnsixteenth">
+				<button id="frontOnly" value="ON" type="button" onclick="toggleFrontState(); changeFrontColor(); sendFrontMessage();" class="btn">Front Only Enabled</button>
+			</div>
+		</div>
+		<div class="darkgraysmallest">
+			<h1>Horizontal Thruster Power</h1>
+			<p>&nbsp;</p>
+			<input  type="range" min="1" max="5" value="1500" class="slider" onchange="showSlider1Value(this.value)"/>
+			<span id="Slider1" class="text">5</span>
+		</div>
+		<div class="lightgraysmallest">
+			<h1>Vertical Thruster Power</h1>
+			<p>&nbsp;</p>
+			<input  type="range" min="1" max="5" value="1500" class="slider" onchange="showSlider2Value(this.value)"/>
+			<span id="Slider2" class="text">5</span>
+		</div>
+	</div>
+</div>
+<script>
+/*
+  document.getElementById('butThruster').style.backgroundColor = "#FF0000";
+  document.getElementById('video1').style.backgroundColor = "#00FF00";
+  document.getElementById('video7').style.backgroundColor = "#00FF00";
+  document.getElementById('handleTurncc').style.backgroundColor = "#00FF00";
+*/
+
+  document.addEventListener("keypress",sendTestMessage, false);
+  document.addEventListener("keypress",toggleState, false);
+  document.addEventListener("keypress",changeColor, false);
+  document.addEventListener("keypress",sendVideomMessage, false);
+  //document.addEventListener("keypress",sendVideopMessage, false);
+  document.addEventListener("keypress",sendHandleTurnDir, false);
+  //document.addEventListener("keydown",keycode, false);
+
+/* OLD CODE
+
+
+  function forwardProportion(Prop){
+    socket.emit('forwardProportionMessage', Prop);
+    console.log(fProp);
+  }
+
+  function translateProportion(Prop){
+    socket.emit('ProportionMessage', Prop);
+    console.log(tProp);
+  }
+
+  function rotateProportion(Prop){
+    socket.emit('rotateProportionMessage', Prop);
+    console.log(rProp);
+  }
+
+  function verticalProportion(Prop){
+    socket.emit('verticalProportionMessage', Prop);
+    console.log(vProp);
+  }
+*/
+  function videoSwitch(Channel){
+    socket.emit('videoSwitchMessage', Channel);
+    console.log(Channel);
+  }
+
+  var socket = io();
+
+  //creates an event listener for a keypress
+  var thrusterToggle = document.getElementById("butThruster");
+      thrusterToggle.addEventListener("keypress", toggleState);
+
+      //checks for spacebar before running the toggleState function that switches the value of the button
+      function toggleState(e){
+        if(e.keyCode == "32"){
+  	if (butThruster.value=="OFF"){
+  	 butThruster.value = "ON";
+  	 console.log(butThruster.value);
+  	} else {
+  	 butThruster.value = "OFF";
+  	 console.log(butThruster.value);
+  	}
+         }
+       }
+
+      function changeColor(e){
+        if(e.keyCode == "32"){
+  	//changes text of button and color of button based on the state
+  	if (butThruster.value=="ON"){
+  	 document.getElementById('butThruster').innerHTML = 'Thrusters Disabled';
+  	 document.getElementById('butThruster').style.backgroundColor = "#f45c42";
+  	} else {
+  	 document.getElementById('butThruster').innerHTML = 'Thrusters Enabled';
+  	 document.getElementById('butThruster').style.backgroundColor = "#00C176";
+  	}
+         }
+       }
+  //creates an event listener for keypress
+  var thrusterButton = document.getElementById("butThruster");
+      //thrusterButton.addEventListener("keypress", sendTestMessage);
+        //function checks for the space bar before running the code that sends the actual message
+    function sendTestMessage(e){
+         if(e.keyCode == "32"){
+  	socket.emit('TestMessage', butThruster.value);
+  	}
+       }
+
+function toggleBackState(){
+    if (backOnly.value=="OFF"){
+        backOnly.value = "ON";
+        console.log(backOnly.value);
+        }
+    else {
+        backOnly.value = "OFF";
+        console.log(backOnly.value);
+         }
+}
+
+//checks for spacebar and before running changeColor
+function changeBackColor(){
+  //changes text of button and color of button based on the state
+  if (backOnly.value=="ON"){
+   document.getElementById('backOnly').innerHTML = 'Back Only Disabled';
+   document.getElementById('backOnly').style.backgroundColor = "#f45c42";
+  }
+  else {
+   document.getElementById('backOnly').innerHTML = 'Back Only Enabled';
+   document.getElementById('backOnly').style.backgroundColor = "#00C176";
+  }
+
+}
+
+function sendBackMessage(){
+socket.emit('backOnlyMessage', backOnly.value);
+   }
+
+function toggleFrontState(){
+    if (frontOnly.value=="OFF"){
+        frontOnly.value = "ON";
+        console.log(frontOnly.value);
+        }
+    else {
+        frontOnly.value = "OFF";
+        console.log(frontOnly.value);
+         }
+   }
+
+   //checks for spacebar and before running changeColor
+function changeFrontColor(){
+    //changes text of button and color of button based on the state
+   if (frontOnly.value=="ON"){
+      document.getElementById('frontOnly').innerHTML = 'Front Only Disabled';
+      document.getElementById('frontOnly').style.backgroundColor = "#f45c42";
+     }
+  else {
+      document.getElementById('frontOnly').innerHTML = 'Front Only Enabled';
+      document.getElementById('frontOnly').style.backgroundColor = "#00C176";
+     }
+
+   }
+
+function sendFrontMessage(){
+  socket.emit('frontOnlyMessage', frontOnly.value);
+  }
+
+
+function toggleLiftBag(){
+	if (liftBag.value=="Locked"){
+		liftBag.value = "Released";
+		console.log(liftBag.value)
+	}else{
+		liftBag.value = "Locked";
+		console.log(liftBag.value);
+	}
+}
+
+
+function changeLiftBagColor(){
+	if (liftBag.value=="Released"){
+		document.getElementById('liftBag').innerHTML = 'LiftBag Released';
+		document.getElementById('liftBag').style.backgroundColor = "#f45c42";
+	} else {
+		document.getElementById('liftBag').innerHTML = 'LiftBag Locked';
+		document.getElementById('liftBag').style.backgroundColor = "#00C176";
+	}
+}
+function sendLiftBagMessage(){
+	socket.emit('liftbagMessage', liftBag.value);
+}
+
+//Videom Message
+function sendVideomMessage(e){
+	if(e.keyCode == "49"){
+    document.getElementById('video1').style.backgroundColor = "#00C176";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "";
+	document.getElementById('video7').style.backgroundColor = "";
+	document.getElementById('video8').style.backgroundColor = "";
+    socket.emit('videomMessage', video1.value);
+	  console.log(video1.value);
+	}
+	if(e.keyCode == "50"){
+    document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "#00C176";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "";
+	document.getElementById('video7').style.backgroundColor = "";
+	document.getElementById('video8').style.backgroundColor = "";
+	  socket.emit('videomMessage', video2.value);
+	  console.log(video2.value);
+	}
+	if(e.keyCode == "51"){
+    document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "#00C176";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "";
+	document.getElementById('video7').style.backgroundColor = "";
+	document.getElementById('video8').style.backgroundColor = "";
+	  socket.emit('videomMessage', video3.value);
+	  console.log(video3.value);
+	}
+	if(e.keyCode == "52"){
+    document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "#00C176";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "";
+	document.getElementById('video7').style.backgroundColor = "";
+	document.getElementById('video8').style.backgroundColor = "";
+	  socket.emit('videomMessage', video4.value);
+	  console.log(video4.value);
+	}
+	if(e.keyCode == "53"){
+    document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "#00C176";
+    document.getElementById('video6').style.backgroundColor = "";
+	document.getElementById('video7').style.backgroundColor = "";
+	document.getElementById('video8').style.backgroundColor = "";
+	  socket.emit('videomMessage', video5.value);
+	  console.log(video5.value);
+	}
+	if(e.keyCode == "54"){
+    document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "#00C176";
+	document.getElementById('video7').style.backgroundColor = "";
+	document.getElementById('video8').style.backgroundColor = "";
+	  socket.emit('videomMessage', video6.value);
+	  console.log(video6.value);
+	}
+	if(e.keyCode == "55"){
+	document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "";
+    document.getElementById('video7').style.backgroundColor = "#00C176";
+    document.getElementById('video8').style.backgroundColor = "";
+    socket.emit('videomMessage', video7.value);
+	  console.log(video7.value);
+	}
+	if(e.keyCode == "56"){
+	document.getElementById('video1').style.backgroundColor = "";
+    document.getElementById('video2').style.backgroundColor = "";
+    document.getElementById('video3').style.backgroundColor = "";
+    document.getElementById('video4').style.backgroundColor = "";
+    document.getElementById('video5').style.backgroundColor = "";
+    document.getElementById('video6').style.backgroundColor = "";
+    document.getElementById('video7').style.backgroundColor = "";
+    document.getElementById('video8').style.backgroundColor = "#00C176";
+    socket.emit('videomMessage', video8.value);
+	  console.log(video8.value);
+	}
+}
+
+
+function sendHandleTurnDir(e){
+  if(e.keyCode == "48"){
+  document.getElementById('handleTurn').style.backgroundColor = "#00C176";
+  document.getElementById('handleTurn').style.backgroundColor = "";
+  socket.emit('handleTurnMessage', handleTurn.value);
+  console.log("Clockwise");
+  }
+  if(e.keyCode == "57"){
+  document.getElementById('handleTurn').style.backgroundColor = "#00C176";
+  document.getElementById('handleTurn').style.backgroundColor = "";
+  socket.emit('handleTurnMessage', handleTurn.value);
+  console.log("Counter Clockwise");
+  }
+}
+
+/*
+//Rotation Animation
+var looper;
+var degrees = 0;
+function rotateAnimation(el, speed){
+	var elem = document.getElementById(el);
+	elem.style.WebkitTransform = "rotate("+degrees+"deg)";
+	looper = setTimeout('rotateAnimation(\''+el+'\','+speed+')',speed);
+	degrees++;
+	if(degrees > 359){
+		degrees = 1;
+	}
+}
+*/
+
+//Horizontal Slider
+/*
+var horizontalValue
+$(document).keydown(function(e) {
+    switch(e.which) {
+			case 65:
+				console.log("test");
+				horizontalValue = "1";
+				document.getElementById("Slider1").value = horizontalValue;
+				break;
+			case 66:
+				console.log("test1");
+				document.getElementById("Slider1").value = "2"
+				break;
+		}
+})
+*/
+
+function showSlider1Value(horizontalValue){
+	document.getElementById("Slider1").innerHTML=horizontalValue;
+	socket.emit('horizontalProportionMessage', horizontalValue);
+	console.log(horizontalValue);
+	var x = horizontalValue;
+
+
+
+/*
+	function(e){
+		if(e.keycode == "81"){
+			document.getElementById("Slider1").value = "1"
+		}else if(e.keycode == "87"){
+			x = 2
+		}else if(e.keycode == "69"){
+			x = 3
+		}else if(e.keycode == "82"){
+			x=4
+		}else if(e.keycode == "84"){
+			x=5
+		}
+	};
+*/
+	//--------------
+	$.fn.horizontalThrusters = function( userdefinedoptions ){
+	    var $this = $(this), opt , count = 0;
+	    $this.knob({
+	        'min':0,
+	        'max': 5,
+	        'readOnly': true,
+	        'width': 80,
+	        'height': 80,
+	        'fgColor': "#2EA2CB",
+	        'bgColor': "transparent",
+	        'displayInput' : true,
+	        'dynamicDraw': false,
+	        'ticks': 0,
+	        'thickness': 0.3,
+					'angleOffset': -125,
+					'angleArc': 250
+
+	    });
+			$this.val(x).trigger('change');
+	};
+
+	$('#HorizontalThrusterPower1').horizontalThrusters();
+	$('#HorizontalThrusterPower3').horizontalThrusters();
+	$('#HorizontalThrusterPower4').horizontalThrusters();
+	$('#HorizontalThrusterPower6').horizontalThrusters();
+}
+		/*
+		if (newValue = 1){
+			document.getElementById("HorizontalThrusterPower").style.animationDuration = "5s";
+		} else if (newValue = 2){
+			document.getElementById("HorizontalThrusterPower").style.animationDuration = "2s";
+		}
+		*/
+
+
+	//rotateAnimation("HorizontalThrusterPower", horizontalValue)
+
+//Vertical Thrusters
+
+function showSlider2Value(verticalValue)
+{
+	document.getElementById("Slider2").innerHTML=verticalValue;
+	socket.emit('verticalProportionMessage', verticalValue);
+	console.log(verticalValue);
+	var y = verticalValue;
+	$.fn.verticalThrusters = function( userdefinedoptions ){
+			var $this = $(this), opt , count = 0;
+			$this.knob({
+					'min':0,
+					'max': 5,
+					'readOnly': true,
+					'width': 80,
+					'height': 80,
+					'fgColor': "#2EA2CB",
+					'bgColor': "transparent",
+					'displayInput' : true,
+					'dynamicDraw': false,
+					'ticks': 0,
+					'thickness': 0.3,
+					'angleOffset': -125,
+					'angleArc': 250
+
+			});
+			$this.val(y).trigger('change');
+	};
+
+	$('#VerticalThrusterPower5').verticalThrusters();
+	$('#VerticalThrusterPower2').verticalThrusters();
+}
+
+//Engine Power
+
+
+	var msg = "14 24 453 23 543 123 534 12 4 3 3 2 65 6 3 5 6 45 3 6 6 45 4 6 5 4 5 45 65 4 45 54 545 543 5435 5435 5435 54354 543 435 543 543 54 5 4 33 9 9 9 9 9 938 73 67262 3 5";
+	//socket.on('SocketStream',function(msg){
+		var array = msg.split(' ');
+		var accx = array[1];
+		var accy = array[2];
+		var accz = array[3];
+		var gyrox = array[4];
+		var gyroy = array[5];
+		var gyroz = array[6];
+		var magx = array[7];
+		var magy = array[8];
+		var magz = array[9];
+		var extpress = array[10];
+		var exttemp = array[11];
+		var bmpp = array[12];
+		var bmpt = array[13];
+		var humid = array[14];
+		var sht = array[15];
+		var udoot = array[16];
+		var drqv = array[17];
+		var drqv2 = array[18];
+		var drqc = array[19];
+		var drqc2 = array[20];
+		var drqt = array[21];
+		var drqt2 = array[22];
+		var corest = array[27];
+		console.log(drqv)
+  //});
+/*
+	var bmptemp = parseInt("bmpt");
+	var shtemp = parseInt("sht");
+	var udootemp = parseInt("udoot");
+	var drqtemp = parseInt("drqt");
+	var drqtemp2 = parseInt("drqt2");
+	var bmppress = parseInt("bmpp");
+	var shpress = parseInt("shp");
+	var corestat = parseInt("corest");
+*/
+	var inttem = ((bmpt + sht + udoot + drqt + drqt2)/5);
+	console.log(inttem)
+	var intpres = (bmpp)
+
+	var inttemp = inttem
+	var intpress = intpres
+
+	document.getElementById("extpress").innerHTML = extpress;
+	document.getElementById("exttemp").innerHTML = exttemp;
+	document.getElementById("humid").innerHTML = humid;
+	document.getElementById("inttemp").innerHTML = inttemp;
+	document.getElementById("intpress").innerHTML = intpress;
+	document.getElementById("drqv").innerHTML = "Input Voltage: " + drqv;
+	document.getElementById("drqv2").innerHTML = "Output Voltage: " + drqv2;
+	document.getElementById("drqc").innerHTML = "Output Current: " + drqc;
+	document.getElementById("drqc2").innerHTML = "Input Current: " + drqc2;
+
+	if(corest === 1) {
+	    document.getElementById('corestatimg').innerHTML.src = "./images/RedCheckmark.svg";
+	} else {
+	    document.getElementById('corestatimg').src = "./images/GreenCheckmark.svg";
+	}
+
+
+  </script>
+</body>
+</html>
+<!--
+      <ul >
+        <li> <a href="index.ejs" style="color:red; padding-left:50px" > Pilot</a></li>
+        <li> <a href="cop.ejs" style="color:red; padding-left:50px"> Co-Pilot</a></li>
+        <li> <a href="ops.ejs" style="color:red;padding-left:50px"> Operations</a></li>
+      </ul>
+
+<p>Pilot Cameras</p>
+
+
+
+<br>
+<br>
+
+
+<button id="handleTurnc" value="0" type="button"> 9: clockwise </button>
+<button id="handleTurncc" value="1" type="button"> 0: counter-clockwise </button>
+<button id="handleTurnToggle" value="OFF" type="button"> Handle Turner Disabled </button>
+
+<br>
+<br>
+
+
+<input  type="range" min="1100" max="2200" value="1500" onchange="showSlider1Value(this.value)"/>
+<span id="Slider1">1500</span>
+
+
+<p>Forward</p>
+ <form>
+    <input type="radio" name="sense" value="1" id="25f" onclick="forwardProportion(25);"> 25<br>
+    <input type="radio" name="sense" value="2" id="33f" onclick="forwardProportion(33);"> 33<br>
+    <input type="radio" name="sense" value="3" id="40f" onclick="forwardProportion(40);"> 40<br>
+    <input type="radio" name="sense" value="4" id="50f" onclick="forwardProportion(50);"> 50<br>
+    <input type="radio" name="sense" value="5" id="100f" onclick="forwardProportion(100);"> 100<br>
+ </form>
+
+<hr>
+<p>Translation</p>
+ <form>
+    <input type="radio" name="sense" value="1" id="25t" onclick="translateProportion(25);"> 25<br>
+    <input type="radio" name="sense" value="2" id="33t" onclick="translateProportion(33);"> 33<br>
+    <input type="radio" name="sense" value="3" id="40t" onclick="translateProportion(40);"> 40<br>
+    <input type="radio" name="sense" value="4" id="50t" onclick="translateProportion(50);"> 50<br>
+    <input type="radio" name="sense" value="5" id="100t" onclick="translateProportion(100);"> 100<br>
+ </form>
+
+<hr>
+  <p>Rotation</p>
+   <form>
+      <input type="radio" name="sense" value="1" id="25r" onclick="rotateProportion(25);"> 25<br>
+      <input type="radio" name="sense" value="2" id="33r" onclick="rotateProportion(33);"> 33<br>
+      <input type="radio" name="sense" value="3" id="40r" onclick="rotateProportion(40);"> 40<br>
+      <input type="radio" name="sense" value="4" id="50r" onclick="rotateProportion(50);"> 50<br>
+      <input type="radio" name="sense" value="5" id="100r" onclick="rotateProportion(100);"> 100<br>
+   </form>
+
+<hr>
+  <p>Vertical</p>
+    <form>
+        <input type="radio" name="sense" value="1" id="25v" onclick="verticalProportion(25);"> 25<br>
+        <input type="radio" name="sense" value="2" id="33v" onclick="verticalProportion(33);"> 33<br>
+        <input type="radio" name="sense" value="3" id="40v" onclick="verticalProportion(40);"> 40<br>
+        <input type="radio" name="sense" value="4" id="50v" onclick="verticalProportion(50);"> 50<br>
+        <input type="radio" name="sense" value="5" id="100v" onclick="verticalProportion(100);"> 100<br>
+    </form>
+-->

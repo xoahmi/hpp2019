@@ -1,0 +1,420 @@
+
+    p {
+		font-family: 'Arial', 'Gill Sans MT', 'Myriad Pro', 'DejaVu Sans Condensed', Helvetica, Arial, 'sans-serif';
+		line-height: ;
+		margin: auto;
+		color: #DDDDDD
+	}
+
+	h1, li {
+		font-family: "Raleway";
+		font-weight: bold;
+		margin: auto;
+		line-height: 95%;
+		font-size: 100%;
+		color: #DDDDDD
+	}
+
+	h3 {
+		font-family: 'Arial', 'Gill Sans MT', 'Myriad Pro', 'Helvetica, Arial', 'sans-serif';
+		align: left;
+		font-weight:400;
+		font-size: 100%;
+		line-height: ;
+		margin: auto;
+		color: #DDDDDD
+	}
+	h4 {
+
+		font-family: 'arial', 'Gill Sans MT', 'Myriad Pro', 'DejaVu Sans Condensed', Helvetica, Arial, 'sans-serif';
+		text-align: center;
+		font-weight:600;
+		font-size: 80%;
+		line-height: ;
+		margin: auto;
+		text-align: inherit;
+		color: #DDDDDD
+	}
+	h5 {
+		font-family: 'Arial', 'Gill Sans MT', 'Myriad Pro', 'DejaVu Sans Condensed', Helvetica, Arial, 'sans-serif';
+		align: left;
+		font-weight:600;
+		font-size: 90%;
+		line-height: 40%;
+		color: #DDDDDD
+	}
+	h6 {
+		font-family: 'Arial', 'Hoefler Text', 'Liberation Serif', Times, 'Times New Roman', 'serif';
+		font-weight: 600;
+		font-size: 150%;
+		line-height: 40%;
+		align: left;
+		text-align: left;
+		color: #DDDDDD
+	}
+
+
+	#body {
+        margin-top: 35px;
+        margin-right: auto;
+		max-height: 900px;
+		width: 1920px;
+		overflow: none;
+		background-color: #101010
+		}
+	#nav, #feature, #footer {
+		background-color: #EFEFEF;
+		padding: 10px;
+		margin: ;
+		text-align: center;
+		height: 3em
+	}
+	#numbers {
+		text-align: left;
+		float: left;
+		background-color: #AB3A3C;
+		line-height: 50px;
+	}
+	.darkgraypaddingbottom {
+		background-color: #262626;
+		height: 9em;
+		padding: 10px 10px 10px 10px
+
+	}
+	.darkgray {
+		background-color: #262626;
+		padding: 10px 10px 10px 10px;
+		text-align: center;
+		height: 9.03em;
+		clear: both
+	}
+	.darkgray1 {
+		background-color: #262626;
+		padding: 10px 10px 10px 10px;
+		text-align: center;
+		height: 7.4em;
+		clear: both
+	}
+	.darkgrayfourth {
+		background-color: #262626;
+		padding: 8% 0% 8% 0%;
+		text-align: center;
+		height: 2.75em;
+		clear: both;
+	}
+	.darkgraylong2 {
+		background-color: #262626;
+		padding: 6px 10px 10px 20px;
+		text-align: center;
+		height: 25.8em;
+		clear: both;
+		overflow: visible;
+	}
+	.lightgray {
+		background-color: #424242;
+		padding: 10px 10px 10px 10px;
+		text-align: center;
+		height: 9.03em;
+		clear: both;
+	}
+	.lightgrayfourth {
+		background-color: #424242;
+		padding: 8% 0% 8% 0%;
+		text-align: center;
+		height: 2.75em;
+		clear: both;
+	}
+	.lightgraytop{
+		background-color: #424242;
+		padding: 8% 0% 8% 0%;
+		text-align: center;
+		clear: both;
+	}
+	.lightgraylong {
+		background-color: #424242;
+		padding: 6px 10px 10px 20px;
+		text-align: center;
+		height: 25.8em;
+		clear: both;
+		overflow: visible;
+
+	}
+	.lightgraylong2 {
+		background-color: #7C7C7C;
+		padding: 6px 10px 10px 20px;
+		text-align: center;
+		height: 30.4em;
+		clear: both;
+		overflow: visible;
+	}
+	.medgray1 {
+		background-color: #3B3B3B;
+		padding: 10px 10px 10px 10px;
+		text-align: center;
+		height: 7.4em;
+		clear: both;
+
+	}
+	.medgraylong {
+		background-color: #3B3B3B;
+		padding: 10px 10px 10px 10px;
+		text-align: center;
+		height: 19.87em;
+		clear: both;
+	}
+	.smallcolumneighth {
+		background-color:;
+		width: 240px;
+		float: left;
+		text-align: center;
+		clear: ;
+		overflow: visible
+	}
+	.smallcolumneighth1 {
+		background-color:;
+		width: 220px;
+		float: left;
+		text-align: center;
+		clear: ;
+		overflow: visible
+	}
+	.smallcolumnfourth {
+		background-color:;
+		width: 480px;
+		float: left;
+		text-align: center;
+	}
+	.smallcolumnsixteenth {
+		background-color:inherit;
+		width: 40%;
+		float: left;
+		padding: 5%;
+		text-align: center;
+		margin: inherit;
+	}
+	.smallcolumnhalf{
+		width: 50%;
+		height: auto;
+	}
+	.widecolumn {
+		width: 960px;
+		float: left;
+		text-align: center;
+	}
+  .half {
+    width: 50%;
+    float: left;
+
+  }
+	.images {
+		padding: .5em;
+		display: block;
+	}
+	.leftalign {
+		text-align: left;
+		width:inherit;
+		float: inherit;
+		padding: inherit;
+		margin: inherit;
+	}
+	.check {
+		margin: 0px auto;
+		display: block;
+	}
+	/* Customize the label (the container) */
+	.container {
+		display: block;
+		position: relative;
+		padding-left: 25px;
+		margin-bottom: px;
+		margin-bottom: 6px;
+		cursor: pointer;
+		font-size: inherit;
+		user-select: none;
+		top: 8px;
+
+	}
+
+	/* Hide the browser's default checkbox */
+	.container input {
+	  position: absolute;
+	  opacity: 0;
+	  cursor: pointer;
+	}
+
+	/* Create a custom checkbox */
+	.checkmark {
+	  position: absolute;
+	  top: -3px;
+	  left: 0;
+	  height: 20px;
+	  width: 20px;
+	  background-color: #eee;
+	}
+
+	/* On mouse-over, add a grey background color */
+	.container:hover input ~ .checkmark {
+	  background-color: #ccc;
+	}
+
+	/* When the checkbox is checked, add a blue background */
+	.container input:checked ~ .checkmark {
+	  background-color: #890406;
+	}
+
+	/* Create the checkmark/indicator (hidden when not checked) */
+	.checkmark:after {
+	  content: "";
+	  position: absolute;
+	  display: none;
+	}
+
+	/* Show the checkmark when checked */
+	.container input:checked ~ .checkmark:after {
+	  display: block;
+	}
+
+	/* Style the checkmark/indicator */
+	.container .checkmark:after {
+	  left: 7px;
+	  top: px;
+	  width: 4px;
+	  height: 14px;
+	  border: solid white;
+	  border-width: 0 3px 3px 0;
+	  transform: rotate(45deg);
+	}
+	.lightgraysmallest {
+		background-color: #424242;
+		padding: 8% 0% 8% 0%;
+		text-align: center;
+		height: 78px;
+		clear: both;
+	}
+	.darkgraysmallest {
+		background-color: #262626;
+		padding: 8% 0% 8% 0%;
+		text-align: center;
+		height: 78px;
+		clear: both;
+	}
+	.btn {
+		background-color: #f45c42;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+		border-radius: 6px;
+		padding: 8px 6px 8px 6px;
+		width: 100px
+	}
+
+	.btn1 {
+		background-color: #2EA2CB;
+		border: none;
+		color: white;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 12px;
+		cursor: pointer;
+		border-radius: 6px;
+		padding: 8px 6px 8px 6px;
+		width: 100px
+	}
+
+    .btn2 {
+    background-color: #00C176;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        cursor: pointer;
+		border-radius: 6px;
+		padding: 8px 6px 8px 6px;
+		width: 100px
+    }
+	.wide {
+		width: 216px;
+		height: 60px;
+		font-size: 18px;
+	}
+	.text {
+		font-family: "Arial";
+		color:#D8D8D8;
+		font-weight: 500
+	}
+
+
+
+svg {
+  width: 100vmin;
+  border: 1px dotted #777;
+  margin: 0 auto;
+  display: block;
+}
+circle{fill:none; stroke-width:3;}
+#track{stroke-width:3;pointer-events:none;}
+
+text {
+  dominant-baseline: central;
+  text-anchor: middle;
+  font-size: 7px;
+  pointer-events: none;
+  fill:Linen;
+}
+svg text::selection {
+  background: none;
+}
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    border-radius: 4px;
+    width: 70%; /* Full-width */
+    height: 9px; /* Specified height */
+    background: #DADAD9; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+.slider::-moz-range-thumb {
+    width: 9px; /* Set a specific slider handle width */
+    height: 9px; /* Slider handle height */
+    background: #4CAF50; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+    border-radius: 4px;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    border-radius: 4px;
+    width: 13px; /* Set a specific slider handle width */
+    height: 13px; /* Slider handle height */
+    background: #2EA2CB; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+#status {
+  height: 20%;
+}
+/*
+@-webkit-keyframes rotation {
+		from {
+				-webkit-transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+		}
+}
+*/
+#HorizontalThrusterPower {
+
+}
+*:focus {
+    outline: none;
+}
