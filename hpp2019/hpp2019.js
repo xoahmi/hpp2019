@@ -11,29 +11,89 @@ const net = require('net');
 const serial = require("serialport");
 const Readline = require('@serialport/parser-readline')
 
+
+//ports and files defined
+
 const HOST = '127.0.0.1';
 const UDPPORT = 33333;
 const SOCKPORT = 55555;
 
+
+//const ROVPORT = 8888;
 const TeddyAddr = 'https://www.mediteddy.space';
-const ROVPORT = 8888;
 
 
 
+//------------Webpage Handling ------
 
-//latest top and bottom side packet
-var bearMessage = "";
-var toPageMessage
+// view engine setup
+const hpp2019 = express();
+
+const routes = require('./routes/index');
 
 
-//express additions
-var hpp2019 = express();
 hpp2019.set('views', path.join(__dirname, 'views'));
-hpp2019.set('view engine', 'ejs');
+hpp2019.set('view engine', 'html'); //html should be ejs
 
 // add io attribute to hpp2019 app object, create and assign socket.io
 hpp2019.io = require('socket.io')();
 
+// JHS Robotics icon as in /public folder
+
+//hpp2019.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//hpp2019.use(logger('dev'));
+
+hpp2019.use(bodyParser.json());
+hpp2019.use(bodyParser.urlencoded({ extended: false }));
+hpp2019.use(cookieParser());
+hpp2019.use(express.static(path.join(__dirname, 'public')));
+
+//assign two new variables to global and every time a page is requested
+//update the view vars to latest values before giving contol to engine
+global.Data1 = "undefined";
+global.Data2 = "undefined";
+//assign the values to corresponding variables for each view/page
+hpp2019.use(function (req, res, next) {
+    res.locals = {
+        Data1: global.Data1,
+        Data2: global.Data2,
+    };
+    next();
+});
+
+//routes for webpage
+hpp2019.use('/', routes);
+
+// catch 404 (page not found) and forward to error handler
+hpp2019.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// other error handlers
+
+// development error handler
+// will print stacktrace
+if (hpp2019.get('env') === 'development') {
+    hpp2019.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
+hpp2019.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
+});
 
 
 
@@ -87,6 +147,9 @@ hpp2019.io.on("connection", function(socket){
 //  console.log("relay:" + testmsg);
     });
 });
-//    
+//
+
+
+
 
 module.exports = hpp2019;
