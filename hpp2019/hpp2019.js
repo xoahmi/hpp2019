@@ -16,10 +16,7 @@ const Readline = require('@serialport/parser-readline')
 const HOST = '127.0.0.1';
 
 const TeddyAddr = 'https://www.mediteddy.space';
-
-
 //------------Webpage Handling ------
-
 // view engine setup
 const hpp2019 = express();
 
@@ -30,8 +27,6 @@ hpp2019.set('views', path.join(__dirname, 'views'));
 hpp2019.engine('html', require('ejs').renderFile);
 hpp2019.set('view engine', 'html');
 
-// hpp2019.set('views', path.join(__dirname, 'views'));
-// hpp2019.set('view engine', 'ejs'); //html should be ejs
 
 // add io attribute to hpp2019 app object, create and assign socket.io
 hpp2019.io = require('socket.io')();
@@ -42,8 +37,6 @@ hpp2019.listen(3000, function(){
     console.log('listening on *:3000');
 });
 
-//hpp2019.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-//hpp2019.use(logger('dev'));
 
 hpp2019.use(bodyParser.json());
 hpp2019.use(bodyParser.urlencoded({ extended: false }));
@@ -63,6 +56,15 @@ hpp2019.use(function (req, res, next) {
     };
     next();
 });
+
+
+
+// hpp2019.set('views', path.join(__dirname, 'views'));
+// hpp2019.set('view engine', 'ejs'); //html should be ejs
+
+
+//hpp2019.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//hpp2019.use(logger('dev'));
 
 //routes for webpage
 hpp2019.use('/', routes);
@@ -101,141 +103,7 @@ hpp2019.use(function(err, req, res, next) {
 
 
 // M A G I C Basic Temp classifier:
-var classifier =
-    [[[0, 1, 1, 3, 3, 3],
-        [0, 1, 1, 3, 3, 3],
-        [0, 1, 3, 5, 5, 5],
-        [0, 1, 3, 5, 5, 5],
-        [0, 1, 3, 5, 5, 5],
-        [0, 1, 2, 2, 2, 2],
-        [0, 1, 1, 4, 4, 4],
-        [0, 1, 1, 6, 6, 6],
-        [0, 1, 1, 4, 6, 6],
-        [0, 1, 1, 1, 1, 6],
-        [0, 1, 1, 1, 1, 1],
-        [0, 1, 1, 1, 1, 1],
-        [0, 1, 1, 1, 1, 1],
-        [0, 1, 1, 1, 1, 1]],
-
-        [[0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1]],
-
-        [[0, 5, 5, 5, 5, 5],
-            [0, 5, 5, 5, 5, 5],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 2, 2, 2],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 4, 4, 4],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0]],
-
-        [[0, 5, 5, 5, 5, 5],
-            [0, 5, 5, 5, 5, 5],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 2, 2, 2],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1],
-            [0, 1, 1, 1, 1, 1]],
-
-        [[0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1]],
-
-        [[0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 5, 5, 5, 5],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 1, 1, 1, 1],
-            [0, 0, 5, 5, 5, 5],
-            [0, 0, 5, 5, 5, 5],
-            [0, 0, 5, 5, 5, 5],
-            [0, 0, 5, 5, 5, 5]],
-
-        [[0, 0, 0, 3, 3, 3],
-            [0, 0, 0, 3, 3, 3],
-            [0, 0, 3, 5, 5, 5],
-            [0, 0, 3, 5, 5, 5],
-            [0, 0, 3, 5, 5, 5],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 4, 4, 4],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 4, 6, 6],
-            [0, 0, 0, 0, 6, 6],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0]],
-
-        [[0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6],
-            [0, 0, 0, 6, 6, 6]],
-
-        [[0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 3, 6, 6, 6],
-            [0, 0, 3, 6, 6, 6],
-            [0, 0, 3, 6, 6, 6],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0]]];
+var classifier = ["011333","011333","013555","013555","013555","012222","011444","011666","011466","011116","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","011111","055555","055555","000000","000000","000000","000222","000000","000444","000000","000000","000000","000000","000000","000000","055555","055555","011111","011111","011111","011222","011111","011111","011111","011111","011111","011111","011111","011111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","001111","005555","001111","001111","001111","001111","005555","005555","005555","005555","000333","000333","003555","003555","003555","000000","000444","000666","000466","000066","000000","000000","000000","000000","000666","000666","000666","000666","000666","000666","000666","000666","000666","000666","000666","000666","000666","000666","000000","000000","003666","003666","003666","000000","000000","000000","000000","000000","000000","000000","000000","000000"]
 
 
 
@@ -255,7 +123,7 @@ const parser = bearPort.pipe(new Readline({ delimiter: '\r\n' }))
 var bearMessage = "00000000000000";
 
 bearPort.on('open', Open);
-parser.on('data', dat)
+parser.on('data', dat);
 
 
 
@@ -265,7 +133,7 @@ function Open() {
 
 function dat(data) {
     if(pageState.length % 4 == 1) {
-        bearMessage = data.toString()
+        bearMessage = data.toString();
         console.log(bearMessage);
     }
 }
@@ -296,33 +164,44 @@ hpp2019.io.on("connection", function(socket){
 //adds a variable called bearMessage to the JSON object that is transmitted to webpages.
     function sendPageData(){
         var d = new Date();
+        var tkmp = pageState;
+        pageState = pageState + ","+priority;
         hpp2019.io.emit('SocketStream', { pageMsg: pageState + " " +  clientConnected + "" + d.getTime() });
         hpp2019.io.emit('pageState', pageState);
+        pageState = tkmp;
     }
-    function sendPriority(){
+    /*function sendPriority(){
         var d = new Date();
         hpp2019.io.emit('SocketStream', { sendPriority: priority + " " +  clientConnected + "" + d.getTime() });
         hpp2019.io.emit('priority', priority);
-    }
+    }*/
 
 //receive safety message from webpage
     socket.on("Pagemsg", function(msg){
         pageState = msg;
         console.log("message is:" + pageState);
         points = pageState.split(',');
-        // var pointPri = [0,0,0,0,0,0];
-        // for(i = 0; i < points.length; i++) {
-        //     a = points[i][0];
-        //     b = points[i][1].charCodeAt(0) - 97;
-        //     c = points[i][2];
-        //     if (a==0 || b==0 || c==0) {
-        //         pointPri[i] = 0;
-        //     }
-        //     else {
-        //         pointPri[i] = classifier[a,b,c];
-        //     }
-        // }
-        // var priority = Math.max(pointPri)
+        var pointPri = [0,0,0,0,0,0];
+        for(i = 0; i < points.length; i++) {
+            a = points[i][0];
+            b = points[i][1].charCodeAt(0) - 97;
+            c = points[i][2];
+            if (a==0 || b==0 || c==0) {
+                pointPri[i] = 0;
+            }
+            else {
+
+                var k = (81)*(a-1)*(a-1) + 14*(b-1) + c - 1;
+                var k2 = 9*(a - 1) + b - 1
+                console.log(classifier[k2].charAt(c - 1));
+            }
+        }
+        priority = pointPri[0];
+        for (j = 1; j < pointPri.length; j++){
+            if(priority < pointPri[j]) {
+                priority = pointPri[j]
+            }
+        }
 
     });
 
@@ -383,11 +262,11 @@ hpp2019.io.on("connection", function(socket){
 
             cleanData();
 
-            sendPageData()
+            sendPageData();
 
             // PRIORITIZE TIME
 
-            sendPriority();
+            //sendPriority();
 
             bearMessage = "00000000000000";
             pageState = "";

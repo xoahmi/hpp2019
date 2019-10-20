@@ -1,11 +1,11 @@
 <html lang="en">
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="../public/stylesheets/mediteddyUI.css">
+        <link rel="stylesheet" type="text/css" href="mediteddyUI.css"> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <script        src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     </head>
     <body>
@@ -32,7 +32,61 @@
             <br>
             <br>
             <div class="col-sm-6" align="left">
-                <div class="jumbotron">
+                <div class="well bigboi" background-color="#ffffff">
+                    <br>
+                    <br>
+                    <img id="locimg" src="javascript:void(0)" width="500">
+                    <script>
+                        var location;
+                        var loc;
+                        var locimg = document.getElementById("locimg");
+                        if (location == "10000000000000"){
+                            locimg.src = "mediteddy_b.png";
+                            loc = "b";
+                        } else if (location == "01000000000000"){
+                            locimg.src = "mediteddy_c.png";
+                            loc = "c";
+                        } else if (location == "00100000000000"){
+                            locimg.src = "mediteddy_d.png";
+                            loc = "d";
+                        } else if (location == "00010000000000"){
+                            locimg.src = "mediteddy_e.png";
+                            loc = "e";
+                        } else if (location == "00001000000000"){
+                            locimg.src = "mediteddy_f.png";
+                            loc = "f";
+                        } else if (location == "00000100000000"){
+                            locimg.src = "mediteddy_g.png";
+                            loc = "g";
+                        } else if (location == "00000010000000"){
+                            locimg.src = "mediteddy_h.png";
+                            loc = "h";
+                        } else if (location == "00000001000000"){
+                            locimg.src = "mediteddy_i.png";
+                            loc = "i";
+                        } else if (location == "00000000100000"){
+                            locimg.src = "mediteddy_j.png";
+                            loc = "j";
+                        } else if (location == "00000000010000"){
+                            locimg.src = "mediteddy_k.png";
+                            loc = "k";
+                        } else if (location == "00000000001000"){
+                            locimg.src = "mediteddy_l.png";
+                            loc = "l";
+                        } else if (location == "00000000000100"){
+                            locimg.src = "mediteddy_m.png";
+                            loc = "m";
+                        } else if (location == "00000000000010"){
+                            locimg.src = "mediteddy_n.png";
+                            loc = "n";
+                        } else if (location == "00000000000001"){
+                            locimg.src = "mediteddy_o.png";
+                            loc = "o";
+                        } else {
+                            locimg.src = "mediteddy_a.png";
+                            loc = "a";
+                        }
+                    </script>
                 </div>
                 <button type="button" class="btn btn-block btn-success">
                     Submit Report
@@ -44,88 +98,121 @@
                         <br>
                         <div class="col-sm-4" align="left">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type1" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type1()">
                                     <img src="sharp_pain.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="center">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type2" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type2()">
                                     <img src="cold.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="right">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type3" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type3()">
                                     <img src="burning.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="left">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type4" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type4()">
                                     <img src="tingling.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="center">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type5" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type5()">
                                     <img src="cysts_boils.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="right">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                               <a id="type6" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type6()">
                                     <img src="rash.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="left">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type7" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type7()">
                                     <img src="throbbing_pain.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="center">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type8" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type8()">
                                     <img src="bleeding.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-sm-4" align="right">
                             <div class="well outer" background-color="#ffffff">
-                                <button type="button" class="btn btn-lg" background-color="7d8594">
+                                <a id="type9" href="javascript:void(0)" type="button" class="btn btn-lg" background-color="7d8594" onclick="type9()">
                                     <img src="elevated_temp.png" height="78px">
-                                </button>
+                                </a>
                             </div>
                         </div>
+                        <script>
+                            var type == 0;
+                            function type1() {
+                                type == 1;
+                            }
+                            function type2() {
+                                type == 2;
+                            }
+                            function type3() {
+                                type == 3;
+                            }
+                            function type4() {
+                                type == 4;
+                            }
+                            function type5() {
+                                type == 5;
+                            }
+                            function type6() {
+                                type == 6;
+                            }
+                            function type7() {
+                                type == 1;
+                            }
+                            function type7() {
+                                type == 1;
+                            }
+                            function type8() {
+                                type == 8;
+                            }
+                            function type9() {
+                                type == 9;
+                            }
+                        </script>
                     </div>
                 </div>
                 <div class="well outer small" background-color="#ffffff">
                     <div class="well inner small" background-color="#737373">
                         <div class="col-sm-10" align="left">
                             <br>
+                            <div class="slidecontainer">
+                                <input id="intensity" type="range" min="0" max="5" steps="1" value="0" class="slider" id="myRange">
+                            </div>
                             <script type="text/javascript">
-                                var slider = document.getElementById("degree");
-                                var output = document.getElementById("intensity");
-                                output.innerHTML = slider.value;    
-                                slider.oninput = function() {
-                                    output.innerHTML = this.value;
+                                var intensity = document.getElementById("intensity");
+                                var deg == 0;
+
+                                intensity.oninput = function() {
+                                    deg = this.value;
                                 }
                             </script>
-                            <div class="slidecontainer">
-                                <input type="range" min="1" max="100" value="0" class="slider" id="myRange">
-                            </div>
                         </div>
                         <div class="col-sm-2" align="right">
                             <button type="button" class="btn btn-success">
-                                <img src="../public/images/check.png" height="30px">
+                                <img src="check.png" height="30px">
                             </button>
                         </div>
                     </div>
