@@ -29,12 +29,13 @@ hpp2019.set('view engine', 'html');
 
 
 // add io attribute to hpp2019 app object, create and assign socket.io
-hpp2019.io = require('socket.io')();
+var server = require('http').Server(hpp2019);
+hpp2019.io = require('socket.io')(server);
 
 
 // setting up webpages on localhost:3000
-hpp2019.listen(3000, function(){
-    console.log('listening on *:3000');
+server.listen(8888, function(){
+    console.log('listening on :8888');
 });
 
 
@@ -128,13 +129,15 @@ parser.on('data', dat);
 
 
 function Open() {
-    console.log("Bear Connected!")
+    console.log("Bear Connected!");
 }
 
 function dat(data) {
+    console.log(data.toString());
     if(pageState.length % 4 == 1) {
         bearMessage = data.toString();
         console.log(bearMessage);
+        hpp2019.io.emit('bearMsg', bearMessage);
     }
 }
 
@@ -166,7 +169,7 @@ hpp2019.io.on("connection", function(socket){
         var d = new Date();
         var tkmp = pageState;
         pageState = pageState + ","+priority;
-        hpp2019.io.emit('SocketStream', { pageMsg: pageState + " " +  clientConnected + "" + d.getTime() });
+        //hpp2019.io.emit('SocketStream', { pageMsg: pageState + " " +  clientConnected + "" + d.getTime() });
         hpp2019.io.emit('pageState', pageState);
         pageState = tkmp;
     }
@@ -210,7 +213,7 @@ hpp2019.io.on("connection", function(socket){
     socket.on("type", function(msg){
 
         if (pageState.length %4 ==0) {
-            if (msg >= 0 && msg < 14) {
+            if (msg >= 0 && msg < 10) {
                 currType = msg;
                 pageState += "" + currType;
             } else {

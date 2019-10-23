@@ -6,7 +6,7 @@ var debug = require('debug')('hpp2019:server');
 var http = require('http');
 
 //Get port from environment and store in Express.
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8888');
 hpp2019.set('port', port);
 
 //Create HTTP server.

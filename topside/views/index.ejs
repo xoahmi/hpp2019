@@ -2,7 +2,7 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/public/stylesheets' />
   </head>
   <body>
 
@@ -71,7 +71,7 @@
 
     <div role="main" class="container">
 
-      <img id="roll" src="/images/Roll.png" class="roll">
+      <img id="roll" src="/public/images/Roll.png" class="roll">
 
       <img id="pitch" src="/images/Pitch.png" class="pitch" >
 
@@ -107,38 +107,6 @@
     <script type="text/javascript">
 
 
-
-var orientation  = document.getElementById("orientation");
-      var timestamp = document.getElementById("timestamp");
-      var alpha = document.getElementById("alpha");
-      var beta = document.getElementById("beta");
-      var gamma = document.getElementById("gamma");
-      var heading = document.getElementById("heading");
-      var a, b, g, mX,mY,mZ,AccX,AccY,AccZ,m;
-
-
-
-      var timerButton = document.getElementById("butTime");
-      var timer = document.getElementById("Timer");
-      var timerInt;
-
-      timer.innerText = "00:00:00";
-      timerButton.addEventListener("click", startTimer);
-      function startTimer() {
-        timer.innerText = "00:00:00";
-        timerInt = setInterval(updateTimer, 1000);
-        setTimeout(stopTimer, 15*1000);
-      }
-      function updateTimer() {
-        var d = new Date();
-        timer.innerText = d.toLocaleTimeString();
-      }
-      function stopTimer() {
-        clearInterval(timerInt);
-        timer.innerText = "Timer Stopped!";
-      }
-
-
       var safetyButton = document.getElementById("butSafe");
       safetyButton.addEventListener("click", sendSafetyMessage);
       function sendSafetyMessage() {
@@ -150,44 +118,12 @@ var orientation  = document.getElementById("orientation");
       //socket io client connection. Note, there is not need to supply server URL/Port when node is source.
       var socket = io();
 
+console.log("Hello world");
+
       function splitMessage(message) {
         var dataArray = message.split(' ');
-        var tempText = "";
-        for (i=0; i < dataArray.length; i++) {
-          tempText = tempText + dataArray[i] + '<br>';
+        console.log(dataArray);
 
-          if(i == 4){
-            AccX = (dataArray[i] / 100);
-          }
-          if(i == 5){
-            AccY = (dataArray[i] / 100);
-          }
-           if(i == 6){
-            AccZ = (dataArray[i] / 100);
-          }
-          if(i == 7){
-            mX = (dataArray[i] / 16);
-          }
-          if(i == 8){
-            mY = (dataArray[i] / 16);
-          }
-           if(i == 9){
-            mZ = (dataArray[i] / 16);
-          }
-          if(i == 13) {
-            a = (dataArray[i] / 16);
-            alpha.innerText = a;
-          }
-          if(i == 14){
-            b = -(dataArray[i]);
-            beta.innerText = b;
-          }
-          if(i == 15){
-            g = (dataArray[i] / 16);
-            gamma.innerText = g;
-          }
-
-        }//end for loop
 
             //m = Math.atan((mY*Math.cos(AccZ)-mZ*Math.sin(AccZ))/(mX*Math.cos(AccX)+mY*Math.sin(AccZ)*Math.sin(AccX)-mZ*Math.cos(AccX)*Math.sin(AccX)))
             m = a;
@@ -195,72 +131,10 @@ var orientation  = document.getElementById("orientation");
 
         document.getElementById("rawData").innerHTML = tempText;
       }
-
-      //working on changing HUD
-      function displayHUD(){
-
-        if((b<=90)&&(b>= -90)) {
-          var y = "translateY(" + b + "px)";
-        }
-        if((g<=30)&&(g>= -30)) {
-          var z = "rotate3d(0,0,-1," + g + "deg)";
-        }
-
-
-        pitch.style.webkitTransform = y;
-        pitch.style.transform = y;
-
-        roll.style.webkitTransform = z;
-        roll.style.transform = z;
-
-
-        //if((m<=184)&&(m>= -183)){
-          document.getElementById("N").style.visibility = "visible";
-          var translation = "translateX("+ (m-80) +"px)" ;
-        //}else{
-          //document.getElementById("N").style.visibility = "hidden";
-        //}
-
-        //if((m<=1)&&(m>=-367)){
-          document.getElementById("E").style.visibility = "visible";
-          var translation1 = "translateX("+ (m-150) +"px)" ;
-        //}else{
-          //document.getElementById("E").style.visibility = "hidden";
-        //}
-
-        //if((m<=-183)&&(m>=-552)){
-          document.getElementById("S").style.visibility = "visible";
-          var translation2 = "translateX("+ (m-245) +"px)" ;
-        //}else{
-          //document.getElementById("S").style.visibility = "hidden";
-        //}
-
-
-        //if((m<=-367)&&(m>=-736)){
-          document.getElementById("W").style.visibility = "visible";
-          var translation3 = "translateX("+ (m+10) +"px)" ;
-        //}else{
-          //document.getElementById("W").style.visibility = "hidden";
-        //}
-
-          N.style.webkitTransform = translation;
-          N.style.transform = translation;
-          E.style.webkitTransform = translation1;
-          E.style.transform = translation1;
-          S.style.webkitTransform = translation2;
-          S.style.transform = translation2;
-          W.style.webkitTransform = translation3;
-          W.style.transform = translation3;
-
-
-
-
-      }
-
       //socket io client callback to trap 'SocketStream' named socket. Note, msg is a JSON object and not string.
       socket.on('SocketStream',function(msg){
         document.getElementById("rawData").innerHTML = msg.bottomMessage;
-        //splitMessage(msg.bottomMessage);
+        console.log(splitMessage(msg.bottomMessage));
         //displayHUD();
       });
 
